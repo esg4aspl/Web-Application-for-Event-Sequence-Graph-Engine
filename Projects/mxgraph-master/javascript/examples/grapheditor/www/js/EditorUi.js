@@ -3518,6 +3518,7 @@ EditorUi.prototype.save = function(name)
 	}
 };
 //JSON File here
+//JSON File creating
 EditorUi.prototype.sendJSON = function(){ 
 	var graph = this.editor.graph;
 	var model = graph.getModel();
