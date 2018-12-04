@@ -1,15 +1,10 @@
-name := """mongoPlayFramework"""
+name := """ESG"""
 
 version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.12.6"
-
-libraryDependencies += "org.scala-lang" % "scala-library" % "2.11.8"
-libraryDependencies += "org.scala-lang" % "scala-library" % "2.10.6"
-libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.11.8"
-
 
 crossScalaVersions := Seq("2.11.8", "2.12.4")
 
