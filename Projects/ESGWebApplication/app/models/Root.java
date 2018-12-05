@@ -1,6 +1,5 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Root {
@@ -8,19 +7,24 @@ public class Root {
 	private Integer id;
 	private List<Vertex> vertexList;
 	private List<Edge> edgeList;
-	public Root(int id, String name)//en az ikitane verrtices olmalı
+	public Root(int id, String name, List<Vertex> vertexList, List<Edge> edgeList)//en az ikitane verrtices olmalı
 	{
-		vertexList=new ArrayList<>();
-		edgeList=new ArrayList<>();
-		this.id=id;
-		this.name=name;
+		this.vertexList=vertexList;
+		this.edgeList=edgeList;
+		this.setId(id);
+		this.setName(name);
 	}
-	public void addVertex(Vertex vertex)
-	{
-		vertexList.add(vertex);
+	public String getName() {
+		return name;
 	}
-	public void addEdge(Edge edge)
-	{
-		edgeList.add(edge);
+	public void setName(String name) {
+		this.name = name;
 	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 }
