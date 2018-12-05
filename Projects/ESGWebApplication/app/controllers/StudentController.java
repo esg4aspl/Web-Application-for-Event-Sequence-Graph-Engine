@@ -21,6 +21,6 @@ public class StudentController extends Controller{
 		basicDBObject.put("age", 23);
 		dbCollection.insert(basicDBObject);
 		return ok(play.libs.Json.toJson(basicDBObject));
-		//new project
+		//new project c
 	}
 }
