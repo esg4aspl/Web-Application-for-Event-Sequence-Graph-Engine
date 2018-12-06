@@ -6,35 +6,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+
 
 import models.Edge;
 import models.Root;
 import models.Vertex;
 import play.mvc.Controller;
 import play.mvc.Result;
+//import org.json.simple.JSONObject;
 
 public class StudentController extends Controller{
 	private List<Vertex> vertices=new ArrayList<>();
 	private List<Edge> edges= new ArrayList<>();
 	private List<Root> roots= new ArrayList<>();
 
-	public Result dbConnection()
+	public DB connectDB()
 	{
 		String localHostName = play.Configuration.root().getString("mongo.local.hostname");
 		Integer  localPort = play.Configuration.root().getInt("mongo.local.port");
 		MongoClient mongoClient= new MongoClient(localHostName,localPort);
 		DB db= mongoClient.getDB("ESG");
-		DBCollection dbCollection= db.getCollection("root");
+		return db;
+	}
+	//insert data to mongodb
+	public Result insertDataToDB(DBCollection dbCollection)
+	{
 		BasicDBObject basicDBObject=new BasicDBObject();
-		
-		/////insert data to mongodb
-		/*
 		List<BasicDBObject> vertexList=new ArrayList<>();
 		List<BasicDBObject> edgeList=new ArrayList<>();
 		List<BasicDBObject> rootList=new ArrayList<>();
@@ -86,18 +87,24 @@ public class StudentController extends Controller{
 		basicDBObject.put("vertices",vertexList);
 		basicDBObject.put("edges",edgeList);
 		dbCollection.insert(basicDBObject);
-		*/
-		
-		//////read data from mongodb
+		return ok("data is inserted");
+	}
+	
+	//read data from mongodb
+	public String readDataFromDB(DBCollection dbCollection)
+	{
 		DBCursor cursor = dbCollection.find();
 		String jsonText="";
 		while (cursor.hasNext()) {
 			int i=1;
 			jsonText+=cursor.next().toString();
 		}
-		
-		
-		/////write to json
+		return jsonText;
+	}
+	
+	//write to json
+	public Result writeDataToJSON(String jsonText)
+	{
 		try {
 			FileWriter fw=new FileWriter("myJSON.json");
 			fw.write(jsonText);
@@ -106,7 +113,22 @@ public class StudentController extends Controller{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return ok("Data is written");
+	}
+	
+	//read data fromJSON
+	public void readDataFromJSON()
+	{
+		//TODO
+	}
+	public Result dbConnection()
+	{
+		
+		DBCollection dbCollection= connectDB().getCollection("root");
+		insertDataToDB(dbCollection);
+		String jsonText=readDataFromDB(dbCollection);
+		writeDataToJSON(jsonText);
 		//return ok(play.libs.Json.toJson(basicDBObject));
-		return ok("it is created");
+		return ok("dbconnections are done.");
 	}
 }
