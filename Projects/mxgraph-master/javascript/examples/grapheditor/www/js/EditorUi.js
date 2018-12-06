@@ -3518,7 +3518,7 @@ EditorUi.prototype.save = function(name)
 	}
 };
 //JSON File here
-//JSON File creating
+
 EditorUi.prototype.sendJSON = function(){ 
 	var graph = this.editor.graph;
 	var model = graph.getModel();
@@ -3535,32 +3535,51 @@ EditorUi.prototype.sendJSON = function(){
     	cells.push(model.getCell(c));
     }
   
-	var vertices  =[] ;
-	var edges =[];
+	var graphVertices  =[] ;
+	var graphEdges =[];
 	
 		for( var i = 2 ; i < cellSize ; i++){
-		/*	if(cells[i] == null){
-				cells[i] = cells[i+1];
-				alert(cells[i].style);
-			}*/
+	
 		
 			if(cells[i].isVertex()){
-				vertices.push(cells[i]);
+				graphVertices.push(cells[i]);
 				}
 			else
 			{
-				edges.push(cells[i]);
+				graphEdges.push(cells[i]);
 			}
 		}
 		
-		for(var k = 0; k < vertices.length; k++){
-			vertices[k].setId(k);
+		for(var k = 0; k < graphVertices.length; k++){
+			graphVertices[k].setId(k);
 		}
 			
-		for(var j = 0; j < edges.length;j++){
-			edges[j].setId(j);
+		for(var j = 0; j < graphEdges.length;j++){
+			graphEdges[j].setId(j);
 		}
-       
+		
+		
+		var ESG = { ID : 1, name : "Paper: Does Depth ReallyMatter? On the of Model Refinement For Testing and Reliability Figure: 2",vertices:[],edges:[]};
+	   alert(graphEdges[0].getId());
+		for(var i in graphVertices){
+	    	
+			var vertex = graphVertices[i];
+	    	ESG.vertices.push({
+	    		"ID" : vertex.getId(),
+	    		"event" :vertex.getValue()
+	    	});
+	    }
+	    for(var k = 0; k < graphEdges.length; k++){
+	    	var edge = graphEdges[k];
+	    	ESG.edges.push({
+	    		"ID" : edge.getId(),
+	    		"source" :edge.source.getId(),
+	    		"target" :edge.target.getId()
+	    	});
+	    }
+		var myJSON = JSON.stringify(ESG);
+	    alert(myJSON);
+
   
 };
 /**
