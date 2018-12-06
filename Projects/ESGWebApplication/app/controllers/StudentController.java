@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
@@ -29,9 +32,12 @@ public class StudentController extends Controller{
 		DB db= mongoClient.getDB("ESG");
 		DBCollection dbCollection= db.getCollection("root");
 		BasicDBObject basicDBObject=new BasicDBObject();
+		
+		/////insert data to mongodb
+		/*
 		List<BasicDBObject> vertexList=new ArrayList<>();
 		List<BasicDBObject> edgeList=new ArrayList<>();
-		//List<BasicDBObject> rootList=new ArrayList<>();
+		List<BasicDBObject> rootList=new ArrayList<>();
 		
 		Vertex v1=new Vertex(0,"event1");
 		Vertex v2=new Vertex(1,"event2");
@@ -61,24 +67,46 @@ public class StudentController extends Controller{
 			basicDBObject.put("name", r.getName());
 			for(Vertex v:vertices)
 			{
-				vertexList.add(new BasicDBObject("id",v.getId()));
-				vertexList.add(new BasicDBObject("event",v.getEvent()));
+				BasicDBObject basicDBObjectVertex=new BasicDBObject();
+				basicDBObjectVertex.put("id",v.getId());
+				basicDBObjectVertex.put("event",v.getEvent());
+				vertexList.add(basicDBObjectVertex);
 			}
 			
 			for(Edge e: edges)
 			{
-
-				edgeList.add(new BasicDBObject("id",e.getId()));
-				edgeList.add(new BasicDBObject("source",e.getSource()));
-				edgeList.add(new BasicDBObject("target",e.getTarget()));
+				BasicDBObject basicDBObjectEdge=new BasicDBObject();
+				basicDBObjectEdge.put("id",e.getId());
+				basicDBObjectEdge.put("source",e.getSource());
+				basicDBObjectEdge.put("target",e.getTarget());
+				edgeList.add(basicDBObjectEdge);
 			}
 		}
 		
 		basicDBObject.put("vertices",vertexList);
 		basicDBObject.put("edges",edgeList);
 		dbCollection.insert(basicDBObject);
+		*/
 		
-		return ok(play.libs.Json.toJson(basicDBObject));
-		//return ok("it is added");
+		//////read data from mongodb
+		DBCursor cursor = dbCollection.find();
+		String jsonText="";
+		while (cursor.hasNext()) {
+			int i=1;
+			jsonText+=cursor.next().toString();
+		}
+		
+		
+		/////write to json
+		try {
+			FileWriter fw=new FileWriter("myJSON.json");
+			fw.write(jsonText);
+			fw.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//return ok(play.libs.Json.toJson(basicDBObject));
+		return ok("it is created");
 	}
 }
