@@ -3577,8 +3577,8 @@ EditorUi.prototype.sendJSON = function(){
 	    		"target" :edge.target.getId()
 	    	});
 	    }
-		var myJSON = JSON.stringify(ESG);
-	    alert(myJSON);
+		var fileJSON = JSON.stringify(ESG);
+	    alert(fileJSON);
 
   
 };
