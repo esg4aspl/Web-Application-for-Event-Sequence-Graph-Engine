@@ -10,11 +10,15 @@ GET     /count                      controllers.CountController.count
 GET     /message                    controllers.AsyncController.message
 
 POST	/sayHello					controllers.PersonController.sayHello()
+GET		/sayHello					controllers.PersonController.sayHello()
 POST	/sayHelloWithTextPlain		controllers.PersonController.sayHelloWithTestPlain()
 POST	/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParser()
+GET		/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParser()
 GET     /welcome/:name/:lastName    controllers.HomeController.welcomeName(name:String, lastName:String)
 
-GET		/connectDB					controllers.StudentController.dbConnection()
+POST	/sendJson					controllers.PersonController.sendJSON()
+#GET		/connectDB					controllers.StudentController.dbConnection()
+#GET		/readJson					controllers.StudentController.readDataFromJSON()
 
 GET		/books						controllers.BooksController.index
 GET		/books/create				controllers.BooksController.create()

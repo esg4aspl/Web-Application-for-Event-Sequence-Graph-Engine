@@ -7,12 +7,14 @@ public class Root {
 	private Integer id;
 	private List<Vertex> vertexList;
 	private List<Edge> edgeList;
-	public Root(int id, String name, List<Vertex> vertexList, List<Edge> edgeList)//en az ikitane verrtices olmalı
+	private String xmlFileString;
+	public Root(int id, String name, List<Vertex> vertexList, List<Edge> edgeList, String xmlFileString)
 	{
 		this.vertexList=vertexList;
 		this.edgeList=edgeList;
 		this.setId(id);
 		this.setName(name);
+		setXmlFileString(xmlFileString);
 	}
 	public String getName() {
 		return name;
@@ -25,6 +27,12 @@ public class Root {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getXmlFileString() {
+		return xmlFileString;
+	}
+	public void setXmlFileString(String xmlFileString) {
+		this.xmlFileString = xmlFileString;
 	}
 	
 }

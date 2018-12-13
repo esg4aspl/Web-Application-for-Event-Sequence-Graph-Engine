@@ -1,10 +1,29 @@
 package controllers;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+//import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+
+import com.fasterxml.jackson.databind.JsonNode;
+//import org.codehaus.jackson.JsonProcessingException;
+//import org.codehaus.jackson.map.ObjectMapper;
+import org.w3c.dom.Document;
+
+//import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -17,7 +36,6 @@ import models.Root;
 import models.Vertex;
 import play.mvc.Controller;
 import play.mvc.Result;
-//import org.json.simple.JSONObject;
 
 public class StudentController extends Controller{
 	private List<Vertex> vertices=new ArrayList<>();
@@ -32,40 +50,111 @@ public class StudentController extends Controller{
 		DB db= mongoClient.getDB("ESG");
 		return db;
 	}
+	
+	//read XML file
+	public String readXmlFile() throws Exception
+	{
+		File xmlFile= new File("myXML.xml");
+		DocumentBuilderFactory documentBuilderFactory= DocumentBuilderFactory.newInstance();
+		DocumentBuilder documentBuilder= documentBuilderFactory.newDocumentBuilder();
+		Document document= documentBuilder.parse(xmlFile);
+		return convertXMLFileToString(document);
+		//TODO according to Turkan's xml file.
+		//NodeList list=document.getElementsByTagName("");
+	}
+	private String convertXMLFileToString(Document xmlDocument)
+	{
+	    TransformerFactory tf = TransformerFactory.newInstance();
+	    Transformer transformer;
+	    String xmlString="";
+	    try {
+	        transformer = tf.newTransformer();
+	         
+	        // Uncomment if you do not require XML declaration
+	        // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+	         
+	        //A character stream that collects its output in a string buffer,
+	        //which can then be used to construct a string.
+	        StringWriter writer = new StringWriter();
+	 
+	        //transform document to string
+	        transformer.transform(new DOMSource(xmlDocument), new StreamResult(writer));
+	 
+	        xmlString = writer.getBuffer().toString();  
+	        //System.out.println(xmlString);                      //Print to console or logs
+	    }
+	    catch (TransformerException e)
+	    {
+	        e.printStackTrace();
+	    }
+	    catch (Exception e)
+	    {
+	        e.printStackTrace();
+	    }
+	    return xmlString;
+	}
+	
+	//read data JSON file
+	@SuppressWarnings("deprecation")
+	public Result readDataFromJSON(JsonNode rootJson) throws Exception, IOException
+	{
+		//ObjectMapper mapper=new ObjectMapper();
+		//JsonNode rootNode = mapper.readTree(new File("TurkansJSON.json"));
+		JsonNode rootNode=rootJson;
+		JsonNode idNode=rootNode.path("ID");
+		JsonNode nameNode=rootNode.path("name");
+		JsonNode xmlFile=rootNode.path("xmlVersion");
+		
+		
+		JsonNode verticesNode=rootNode.path("vertices");
+		Iterator<JsonNode> itr=verticesNode.elements();
+		System.out.println("\nVertices");
+		
+		while (itr.hasNext()) {
+			JsonNode vertexNode=itr.next();
+			
+			JsonNode vertexIdNode=vertexNode.path("ID");
+			JsonNode vertexEventNode=vertexNode.path("event");
+			
+			Vertex vertex= new Vertex(vertexIdNode.intValue(),vertexEventNode.textValue());
+			vertices.add(vertex);
+		}
+		
+		JsonNode edgesNode=rootNode.path("edges");
+		Iterator<JsonNode> iter=edgesNode.elements();
+		System.out.println("\nEdges");
+		
+		while (iter.hasNext()) {
+			JsonNode edgeNode=iter.next();
+			
+			JsonNode edgeIdNode=edgeNode.path("ID");
+			JsonNode edgeSourceNode=edgeNode.path("source");
+			JsonNode edgeTargetNode=edgeNode.path("target");
+			
+			Edge edge=new Edge(edgeIdNode.intValue(),edgeSourceNode.intValue(),edgeTargetNode.intValue());
+			edges.add(edge);
+		}
+		
+
+		Root root=new Root(idNode.intValue(),nameNode.textValue(),vertices,edges,xmlFile.textValue());
+		roots.add(root);
+		return ok("it is ok");
+	        
+	}
+	
 	//insert data to mongodb
-	public Result insertDataToDB(DBCollection dbCollection)
+	public Result insertDataToDB(DBCollection dbCollection) throws Exception
 	{
 		BasicDBObject basicDBObject=new BasicDBObject();
 		List<BasicDBObject> vertexList=new ArrayList<>();
 		List<BasicDBObject> edgeList=new ArrayList<>();
 		List<BasicDBObject> rootList=new ArrayList<>();
 		
-		Vertex v1=new Vertex(0,"event1");
-		Vertex v2=new Vertex(1,"event2");
-		Vertex v3=new Vertex(0,"event1");
-		Vertex v4=new Vertex(1,"event2");
-		Edge e1=new Edge(0,0,1);
-		Edge e2=new Edge(1,0,1);
-		Edge e3=new Edge(0,0,1);
-		Edge e4=new Edge(1,0,1);
-		
-		vertices.add(v1);
-		vertices.add(v2);
-		vertices.add(v3);
-		vertices.add(v4);
-		
-		edges.add(e1);
-		edges.add(e2);
-		edges.add(e3);
-		edges.add(e4);
-		
-		Root r1=new Root(0,"root1",vertices,edges);
-		roots.add(r1);
-		
 		for(Root r:roots)
 		{
 			basicDBObject.put("id", r.getId());
 			basicDBObject.put("name", r.getName());
+			basicDBObject.put("xmlVersion", r.getXmlFileString());
 			for(Vertex v:vertices)
 			{
 				BasicDBObject basicDBObjectVertex=new BasicDBObject();
@@ -106,7 +195,7 @@ public class StudentController extends Controller{
 	public Result writeDataToJSON(String jsonText)
 	{
 		try {
-			FileWriter fw=new FileWriter("myJSON.json");
+			FileWriter fw=new FileWriter("TurkansJSON.json");
 			fw.write(jsonText);
 			fw.flush();
 		} catch (IOException e) {
@@ -116,18 +205,15 @@ public class StudentController extends Controller{
 		return ok("Data is written");
 	}
 	
-	//read data fromJSON
-	public void readDataFromJSON()
+
+	//connect DB
+	public Result dbConnection(JsonNode rootJson) throws Exception
 	{
-		//TODO
-	}
-	public Result dbConnection()
-	{
-		
+		readDataFromJSON(rootJson);
 		DBCollection dbCollection= connectDB().getCollection("root");
 		insertDataToDB(dbCollection);
-		String jsonText=readDataFromDB(dbCollection);
-		writeDataToJSON(jsonText);
+		//String jsonText=readDataFromDB(dbCollection);
+		//writeDataToJSON(jsonText);
 		//return ok(play.libs.Json.toJson(basicDBObject));
 		return ok("dbconnections are done.");
 	}
