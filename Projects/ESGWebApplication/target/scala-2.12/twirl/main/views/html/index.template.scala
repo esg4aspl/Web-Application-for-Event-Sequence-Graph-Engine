@@ -25,7 +25,7 @@ import play.core.j.PlayFormsMagicForJava._
 object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[String,play.twirl.api.HtmlFormat.Appendable] {
 
   /*
- * This template takes a single argument, a String containing a
+ * This template  a single argument, a String containing a
  * message to display.
  */
   def apply/*5.2*/(message: String):play.twirl.api.HtmlFormat.Appendable = {
