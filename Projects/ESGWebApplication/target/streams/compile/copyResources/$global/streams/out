@@ -1,0 +1,4 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGWebApplication/conf/application.conf,/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGWebApplication/target/scala-2.12/classes/application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGWebApplication/conf/logback.xml,/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGWebApplication/target/scala-2.12/classes/logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGWebApplication/conf/routes,/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGWebApplication/target/scala-2.12/classes/routes)[0m
