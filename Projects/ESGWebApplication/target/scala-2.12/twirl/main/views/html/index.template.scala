@@ -26,7 +26,7 @@ object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Html
 
   /*
  * This template takes a single argument, a String containing a
- * message to display.
+ * message
  */
   def apply/*5.2*/(message: String):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
