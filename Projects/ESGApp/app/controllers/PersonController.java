@@ -50,7 +50,7 @@ public class PersonController extends Controller{
 	    }
 	}
 	
-	@BodyParser.Of(BodyParser.Json.class)//////// denenem
+	@BodyParser.Of(BodyParser.Json.class)//////// denene
  	public Result sayHelloWithBodyParser() throws Exception
 	{
 		
