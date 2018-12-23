@@ -16,7 +16,9 @@ POST	/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParse
 GET		/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParser()
 GET     /welcome/:name/:lastName    controllers.HomeController.welcomeName(name:String, lastName:String)
 
-POST	/sendJson					controllers.PersonController.sendJSON()
+POST	/saveESGToDB				controllers.ESGController.saveESGToDB()
+POST	/sendJson					controllers.ESGController.saveESGToDB()
+#POST	/sendJson					controllers.PersonController.sendJSON()
 #GET		/connectDB					controllers.StudentController.dbConnection()
 #GET		/readJson					controllers.StudentController.readDataFromJSON()
 
