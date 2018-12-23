@@ -1,21 +1,26 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Root {
 	private String name;
 	private Integer id;
+	private String xmlFileString;
 	private List<Vertex> vertexList;
 	private List<Edge> edgeList;
-	
-	private String xmlFileString;
-	public Root(int id, String name, List<Vertex> vertexList, List<Edge> edgeList, String xmlFileString)
+	/*public Root(int id, String name, List<Vertex> vertexList, List<Edge> edgeList, String xmlFileString)
 	{
 		this.vertexList=vertexList;
 		this.edgeList=edgeList;
 		this.setId(id);
 		this.setName(name);
 		setXmlFileString(xmlFileString);
+	}*/
+	public Root()
+	{
+		vertexList = new ArrayList<>();
+		edgeList = new ArrayList<>();
 	}
 	public String getName() {
 		return name;
@@ -35,5 +40,19 @@ public class Root {
 	public void setXmlFileString(String xmlFileString) {
 		this.xmlFileString = xmlFileString;
 	}
+	
+	public List<Vertex> getVertexList() {
+		return vertexList;
+	}
+	public void addVertex(Vertex vertex) {
+		this.vertexList.add(vertex);
+	}
+	public List<Edge> getEdgeList() {
+		return edgeList;
+	}
+	public void addEdge(Edge edge) {
+		this.edgeList.add(edge);
+	}
+
 	
 }
