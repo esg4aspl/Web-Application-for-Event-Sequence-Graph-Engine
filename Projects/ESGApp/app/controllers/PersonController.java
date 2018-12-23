@@ -9,6 +9,7 @@ import play.mvc.Result;
 import play.libs.Json;
 
 public class PersonController extends Controller{
+	private StudentController st=new StudentController();
 	/* burcu@burcu-X556UQK:~/workspace/jsonPlay$ 
 	 * curl --header "Content-type: application/json" --request POST --data '{"name": "Guillaume"}' http://localhost:9000/sayHello            
 	public void jsonRepresentationOrParsing()
@@ -23,25 +24,39 @@ public class PersonController extends Controller{
 
 	}
 	*/
+	public Result sendJSON() throws Exception
+	{
+		JsonNode rootJson=request().body().asJson();
+		st.dbConnection(rootJson);
+		return ok("saved to mongoDB");
+	}
+	
+	
+	
 	
 	public Result sayHello() {
 	    JsonNode json = request().body().asJson();
 	    if(json == null) {
 	        return badRequest("Expecting Json data");
 	    } else {
+	        
 	        String name = json.findPath("name").textValue();
 	        if(name == null) {
 	            return badRequest("Missing parameter [name]");
 	        } else {
-	            return ok("Hello " + name);
+	        	st.writeDataToJSON(json.toString());
+	            return ok("it is done");
 	        }
 	    }
 	}
 	
-	@BodyParser.Of(BodyParser.Json.class)
- 	public Result sayHelloWithBodyParser()
+	@BodyParser.Of(BodyParser.Json.class)////
+ 	public Result sayHelloWithBodyParser() throws Exception
 	{
+		
+		
 		JsonNode json= request().body().asJson();
+		//String s=request().body().;
 		String name=json.findPath("name").textValue();
 		if(name==null)
 		{
