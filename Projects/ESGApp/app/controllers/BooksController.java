@@ -13,7 +13,8 @@ public class BooksController extends Controller {
 	public Result index()//loga yazdırıp console da goruntuleyebilirsin
 	{
 		Set<Book> books=Book.allBooks();
-		return ok(Json.toJson(books));
+		//return ok(Json.toJson(books));
+		return ok("asd");
 	}
 
 	public Result create()
