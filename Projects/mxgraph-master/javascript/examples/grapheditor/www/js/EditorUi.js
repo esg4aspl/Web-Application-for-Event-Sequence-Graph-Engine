@@ -3518,7 +3518,6 @@ EditorUi.prototype.save = function(name)
 	}
 };
 //JSON File here
-//JSON File creating
 EditorUi.prototype.sendJSON = function(){ 
 	var graph = this.editor.graph;
 	var model = graph.getModel();
@@ -3539,88 +3538,110 @@ EditorUi.prototype.sendJSON = function(){
     }
   
 	var graphVertices  =[] ;
-	var graphEdges =[];
+	
+    var graphEdges =[];
 	
 	   for( var i = 2 ; i < cellSize ; i++){
 	       if(cells[i] ==  null){
 	    	   alert("vertex or edge is null");
 	       }
-	
-	   if(cells[i].isVertex()){
-	graphVertices.push(cells[i]);
-	   }
-	   else if(cells[i].isEdge())
-	   {
-	graphEdges.push(cells[i]);
-	   }
-	   else{
-	alert("AAAA");
-	}
-	
-	}
-	
-	for(var k = 0; k < graphVertices.length; k++){
-	graphVertices[k].setId(k);
-	}
-	
-	for(var j = 0; j < graphEdges.length;j++){
-	graphEdges[j].setId(j);
-	}
-	
-	
-	var ESG = { ID : 1, name : "Paper: Does Depth ReallyMatter? On the of Model Refinement For Testing and Reliability Figure: 2",xmlVersion:xmlString,vertices:[],edges:[]};
+			
+		   if(cells[i].isVertex()){
+				graphVertices.push(cells[i]);
+		   }
+		   else if(cells[i].isEdge())
+		   {
+				graphEdges.push(cells[i]);
+		   }
+		   else{
+				alert("AAAA");
+			}
+			
+		}
+		
+		for(var k = 0; k < graphVertices.length; k++){
+			graphVertices[k].setId(k);
+		}
+			
+		for(var j = 0; j < graphEdges.length;j++){
+			graphEdges[j].setId(j);
+		}
+		
+		
+		var ESG = { ID : 1, name : "Paper: Does Depth ReallyMatter? On the of Model Refinement For Testing and Reliability Figure: 2",vertices:[],edges:[]};
 	    
 	
-	for(var i in graphVertices){
+		for(var i in graphVertices){
 	    	
-	var vertex = graphVertices[i];
-	
+			var vertex = graphVertices[i];
+			
 	    	ESG.vertices.push({
-	    	"ID" : vertex.getId(),
-	    	"event" :vertex.getValue()
+	    		"ID" : vertex.getId(),
+	    		"event" :vertex.getValue()
 	    	});
 	    }
 	    for(var k = 0; k < graphEdges.length; k++){
 	    	var edge = graphEdges[k];
-	    	if(edge.source == null || edge.target == null){
-	    	alert("Draw ESG again");
 	    	
+	    	if(edge.source == null || edge.target == null){
+	    		alert("Draw ESG again");
+	    		
 	    	}
 	    	else{
-	    	ESG.edges.push({
-	    	"ID" : edge.getId(),
-	    	"source" :edge.source.getId(),
-	    	"target" :edge.target.getId()
-	    	});
+	    		ESG.edges.push({
+		    		"ID" : edge.getId(),
+		    		"source" :edge.source.getId(),
+		    		"target" :edge.target.getId()
+		    	});
 	    	}
 	    	
 	    }
-	   
-
-        var jsonhttp = new XMLHttpRequest();   // new HttpRequest instance 
-	    var url = 'http://localhost:9000/sendJson';
-	    jsonhttp.open('POST',url,true);
+	  /*  var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST","books");
+        var xmlDoc;
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            xmlDoc = xmlhttp.responseXML;
+            console.log(xmlDoc);
+            }
+        };
+        xmlhttp.setRequestHeader('Content-Type', 'text/xml');
+        var xml = mxUtils.getXml(this.editor.getGraphXml());
+        xmlhttp.send(xml);*/
         
-	    jsonhttp.setRequestHeader("Content-Type", "application/json");
-	    jsonhttp.onreadystatechange =  function(){
-    	  var DONE = 4;
-    	  var OK = 200;
-    	  if(jsonhttp.readyState === DONE){
-    	  if(jsonhttp.status === OK){
-    	  alert(jsonhttp.responseText);
-    	  
-    	  }else{
-    	  alert("Error" + jsonhttp.status);
-    	  }
-    	  }
-       };
-       jsonhttp.send(JSON.stringify(ESG));
- 
        
 	   
+		var fileJSON = JSON.stringify(ESG);
+		
+		console.log(fileJSON);
+	
+		/*	var http = new XMLHttpRequest();
+		var url = 'https://jsonplaceholder.typicode.com/todos/1';
+		
+		http.open('POST', url, true);
+
+		//Send the proper header information along with the request
+		http.setRequestHeader('Content-type', 'application/json');
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+		    if(http.readyState == 4 && http.status == 200) {
+		        alert(http.responseText);
+		    }
+		}
+		http.send(fileJSON);*/
+	 //   alert(fileJSON);
+	   /* var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+	    xmlhttp.open("POST", "https://api.tvmaze.com/shows");
+	    xmlhttp.setRequestHeader("Content-Type", "application/json");
+	    xmlhttp.send(fileJSON);
+	    xmlhttp.onreadystatechange = function () {
+	    	 if (xmlhttp.readyState>3 && xmlhttp.status==200) { 
+	    		 success(xmlhttp.responseText); 
+	    		 }
+	    	  
+	    	  };
+	 */
 };
-
-
 /**
  * Executes the given layout.
  */

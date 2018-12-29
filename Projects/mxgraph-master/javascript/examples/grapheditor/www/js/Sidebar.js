@@ -905,7 +905,7 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 		this.createVertexTemplateEntry('ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;', 100, 60, '', 'Double Ellipse', null, null, 'oval ellipse start end state double'),
  	    this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 0, '', 'Directional Connector', null, lineTags + 'directional directed'),
  		this.createVertexTemplateEntry('shape=squareEllipse;whiteSpace=wrap;html=1;', 100, 60, '', 'Square Ellipse', null, null, 'square ellipse'),
- 	//this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 50, 50, '', 'Bidirectional Connector', null, lineTags + 'bidirectional')
+ 		this.createVertexTemplateEntry('shape=dashedEllipse;whiteSpace=wrap;html=1;', 120, 80, '', 'Dashed Ellipse', null, null,'dashed ellipse')
  		
  		];
 	
