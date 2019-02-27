@@ -1,0 +1,11 @@
+2018-12-23 18:47:12,958 [INFO] from application in pool-8-thread-4 - ApplicationTimer demo: Starting application at 2018-12-23T15:47:12.958Z
+2018-12-23 18:47:13,121 [INFO] from play.api.http.EnabledFilters in pool-8-thread-4 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    filters.ExampleFilter
+    play.filters.cors.CORSFilter
+
+2018-12-23 18:47:13,227 [INFO] from play.api.Play in pool-8-thread-4 - Application started (Dev)
+2018-12-23 18:47:13,266 [INFO] from application in application-akka.actor.default-dispatcher-3 - ApplicationTimer demo: Stopping application at 2018-12-23T15:47:13.266Z after 1s.
