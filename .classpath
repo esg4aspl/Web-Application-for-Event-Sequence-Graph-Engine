@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Projects/ESG/app"/>
+	<classpathentry kind="src" path="Projects/ESG/test"/>
+	<classpathentry kind="src" path="Projects/mongoPlayFramework/app"/>
+	<classpathentry kind="src" path="Projects/mongoPlayFramework/test"/>
+	<classpathentry kind="src" path="Projects/mxgraph-master/java/examples"/>
+	<classpathentry kind="src" path="Projects/mxgraph-master/javascript/examples/grapheditor/java/src"/>
+	<classpathentry kind="lib" path="Projects/ESG/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="Projects/ESG/sbt-dist/bin/sbt-launch.jar"/>
+	<classpathentry kind="lib" path="Projects/mongoPlayFramework/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="Projects/mongoPlayFramework/sbt-dist/bin/sbt-launch.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/jars/jetty-6.1.1.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/jars/jetty-util-6.1.1.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/jars/junit-4.7.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/jars/mxPdf.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/jars/servlet-api-2.5-6.1.1.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/lib/mxgraph-all.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/lib/mxgraph-core.jar"/>
+	<classpathentry kind="lib" path="Projects/mxgraph-master/java/lib/mxgraph-swing.jar"/>
+	<classpathentry kind="output" path="Projects/mxgraph-master/bin"/>
+</classpath>

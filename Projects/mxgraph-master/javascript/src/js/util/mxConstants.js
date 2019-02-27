@@ -1877,6 +1877,8 @@
 	//Variable SHAPE_SQUARE_ELLIPSE
 	SHAPE_SQUARE_ELLIPSE: 'squareEllipse',
 	
+	//Variable SHAPE_DASHED_ELLIPSE
+	SHAPE_DASHED_ELLIPSE: 'dashedEllipse',
 	/**
 	 * Variable: SHAPE_RHOMBUS
 	 * 

@@ -1,5 +1,6 @@
 # Resources from graph.properties
 alreadyConnected=Nodes already connected
+
 cancel=Cancel
 close=Close
 collapse-expand=Collapse/Expand
@@ -103,11 +104,13 @@ editImage=Edit Image
 editLink=Edit Link
 editStyle=Edit Style
 editTooltip=Edit Tooltip
+entername = Enter ESG Name
 enterGroup=Enter Group
 enterValue=Enter Value
 enterName=Enter Name
 enterPropertyName=Enter Property Name
 entityRelation=Entity Relation
+
 exitGroup=Exit Group
 expand=Expand
 export=Export
@@ -195,6 +198,7 @@ linewidth=Linewidth
 loading=Loading
 lockUnlock=Lock/Unlock
 manual=Manual
+main=main
 middle=Middle
 misc=Misc
 more=More
@@ -203,6 +207,7 @@ move=Move
 moveSelectionTo=Move Selection to {1}
 navigation=Navigation
 new=New
+
 noColor=No Color
 noFiles=No files
 noMoreResults=No more results
@@ -308,6 +313,7 @@ topAlign=Top Align
 topLeft=Top Left
 topRight=Top Right
 transparent=Transparent
+tree=Show Tree
 turn=Rotate 90°
 uml=UML
 underline=Underline

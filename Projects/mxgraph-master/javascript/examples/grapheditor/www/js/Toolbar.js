@@ -66,7 +66,7 @@ Toolbar.prototype.init = function()
 		this.addSeparator();
 	}
 	
-	var viewMenu = this.addMenu('', mxResources.get('zoom') + ' (Alt+Mousewheel)', true, 'viewZoom', null, true);
+	var viewMenu = this.addMenu('', mxResources.get('ok') + ' (Alt+Mousewheel)', true, 'viewZoom', null, true);
 	viewMenu.showDisabled = true;
 	viewMenu.style.whiteSpace = 'nowrap';
 	viewMenu.style.position = 'relative';
