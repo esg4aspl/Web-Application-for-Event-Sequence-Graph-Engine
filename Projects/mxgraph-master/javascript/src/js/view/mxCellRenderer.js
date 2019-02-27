@@ -139,6 +139,7 @@ mxCellRenderer.registerShape(mxConstants.SHAPE_ARROW, mxArrow);
 mxCellRenderer.registerShape(mxConstants.SHAPE_ARROW_CONNECTOR, mxArrowConnector);
 mxCellRenderer.registerShape(mxConstants.SHAPE_DOUBLE_ELLIPSE, mxDoubleEllipse);
 mxCellRenderer.registerShape(mxConstants.SHAPE_SQUARE_ELLIPSE, mxSquareEllipse);
+mxCellRenderer.registerShape(mxConstants.SHAPE_DASHED_ELLIPSE, mxDashedEllipse);
 mxCellRenderer.registerShape(mxConstants.SHAPE_SWIMLANE, mxSwimlane);
 mxCellRenderer.registerShape(mxConstants.SHAPE_IMAGE, mxImageShape);
 mxCellRenderer.registerShape(mxConstants.SHAPE_LABEL, mxLabel);

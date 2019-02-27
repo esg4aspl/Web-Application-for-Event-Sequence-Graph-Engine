@@ -521,11 +521,6 @@ Format.prototype.refresh = function()
 		arrangePanel.style.display = 'none';
 		
 	
-		
-		
-		
-		
-		
 		this.panels.push(new StyleFormatPanel(this, ui, stylePanel));
 		this.container.appendChild(stylePanel);
         addClickHandler(label, stylePanel, idx++);

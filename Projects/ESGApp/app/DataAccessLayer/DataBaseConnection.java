@@ -1,5 +1,6 @@
 package DataAccessLayer;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,6 +17,9 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSInputFile;
 
 import models.Edge;
 import models.Root;
@@ -32,7 +36,33 @@ public class DataBaseConnection {
 		DBCollection dbCollection= db.getCollection("root");
 		return dbCollection;
 	}
+	public void saveJPEGToDB () throws IOException
+	{
+		String localHostName = play.Configuration.root().getString("mongo.local.hostname");
+		Integer  localPort = play.Configuration.root().getInt("mongo.local.port");
+		DB db= new MongoClient(localHostName,localPort).getDB("ESG");
+		DBCollection dbCollection= db.getCollection("root");
+		String newFileName ="savedJPEG";
+		File imageFile = new File("photoName.jpg");
+		
+		GridFS gfsPhoto = new GridFS(db,"photo");
+		GridFSInputFile gfsFile = gfsPhoto.createFile(imageFile);
+		gfsFile.setFilename(newFileName);
+		gfsFile.save();
+	}
+	
+	public GridFSDBFile showPhotos()
+	{
+		String localHostName = play.Configuration.root().getString("mongo.local.hostname");
+		Integer  localPort = play.Configuration.root().getInt("mongo.local.port");
+		DB db= new MongoClient(localHostName,localPort).getDB("ESG");
+		DBCollection dbCollection= db.getCollection("root");
+		String newFileName = "savedJPEG";
+		GridFS gfsPhoto = new GridFS(db, "photo");
+		GridFSDBFile imageForOutput = gfsPhoto.findOne(newFileName);
+		return imageForOutput;
 
+	}
 	//
 	@SuppressWarnings({ "deprecation", "resource" })
 	public List<String> getItems()
@@ -46,9 +76,7 @@ public class DataBaseConnection {
 		List<String> jsonList=new ArrayList<>();
 		FindIterable<Document> fi=coll.find();
 		MongoCursor<Document> cursor = fi.iterator();
-		//String jsonText="";
 		while (cursor.hasNext()) {
-			//int i=1;
 			jsonList.add( cursor.next().toJson());
 		}
 		return jsonList;

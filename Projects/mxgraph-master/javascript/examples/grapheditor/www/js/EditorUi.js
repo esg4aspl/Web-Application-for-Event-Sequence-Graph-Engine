@@ -3013,6 +3013,7 @@ EditorUi.prototype.createDivs = function()
 	
 	if (!this.editor.chromeless)
 	{
+		
 		this.tabContainer = this.createTabContainer();
 	}
 	else
@@ -3517,8 +3518,10 @@ EditorUi.prototype.save = function(name)
 		}
 	}
 };
+
 //JSON File here
 EditorUi.prototype.sendJSON = function(){ 
+	
 	var graph = this.editor.graph;
 	var model = graph.getModel();
     var cell = model.getCell(1);
@@ -3566,8 +3569,13 @@ EditorUi.prototype.sendJSON = function(){
 			graphEdges[j].setId(j);
 		}
 		
+		var today = new Date();
+		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		var dateTime = date+' '+time;
 		
-		var ESG = { ID : 1, name : "Paper: Does Depth ReallyMatter? On the of Model Refinement For Testing and Reliability Figure: 2",xmlVersion:xmlString,vertices:[],edges:[]};
+		console.log(dateTime);
+		var ESG = { ID : 1, name :  this.sidebar.getESGName(),xmlVersion:xmlString,vertices:[],edges:[]};
 	    
 	
 		for(var i in graphVertices){
@@ -3618,8 +3626,6 @@ EditorUi.prototype.sendJSON = function(){
        
 	   
 };
-
-
 /**
  * Executes the given layout.
  */

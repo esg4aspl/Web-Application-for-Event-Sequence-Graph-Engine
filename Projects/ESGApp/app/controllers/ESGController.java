@@ -1,10 +1,19 @@
 package controllers;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.Binary;
+
 import com.fasterxml.jackson.databind.JsonNode;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 
 import DataAccessLayer.DataBaseConnection;
 import DataAccessLayer.DataFileOperation;
@@ -38,6 +47,74 @@ public class ESGController extends Controller{
 
 		return ok(fileOperation.getRequestRootID(rootJson)+"th graph saved to DB");
 	}
+	
+	public Result saveJPEGToDB () throws IOException
+	{
+		try {
+			//dbConnection.saveJPEGToDB();
+			//return ok(dbConnection.showPhotos().toString());
+			 /*String filename = "photoName.jpg";
+	            String empname ="firstPhoto";
+	            insert(empname,filename, dbConnection.connectDB());
+	             
+	            String destfilename = "destfile.jpg";
+	            *//** Retrieves record where name = empname, including his photo. 
+	              * Retrieved photo is stored at location filename 
+	              **//*
+	            return ok(retrieve(empname, destfilename, dbConnection.connectDB()));
+			*/
+			dbConnection.saveJPEGToDB();
+			
+			return ok(dbConnection.showPhotos().toString());
+		} catch (Exception e) {
+			return ok("jpeg is not saved to db.");
+		}
+		
+	}
+	   
+    void insert(String empname, String filename, DBCollection collection)
+    {
+        try
+        {
+            File imageFile = new File(filename);
+            FileInputStream f = new FileInputStream(imageFile);
+ 
+            byte b[] = new byte[f.available()];
+            f.read(b);
+ 
+            Binary data = new Binary(b);
+            BasicDBObject o = new BasicDBObject();
+            o.append("name",empname).append("photo",data);
+            collection.insert(o);
+            System.out.println("Inserted record.");
+ 
+            f.close();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+     
+    String retrieve(String name, String filename, DBCollection collection)
+    {
+        byte c[] = null;
+        try
+        {
+            DBObject obj = collection.findOne(new BasicDBObject("name", name));
+            String n = (String)obj.get("name");
+            c = (byte[])obj.get("photo");
+            FileOutputStream fout = new FileOutputStream(filename);
+            fout.write(c);
+            fout.flush();
+            fout.close();
+            
+            
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Photo of "+name+" retrieved and stored at "+filename + "\n "+c.toString();
+    }
 
 	public Root isTheSameRoot(List<Root> rootList,JsonNode rootJson)
 	{

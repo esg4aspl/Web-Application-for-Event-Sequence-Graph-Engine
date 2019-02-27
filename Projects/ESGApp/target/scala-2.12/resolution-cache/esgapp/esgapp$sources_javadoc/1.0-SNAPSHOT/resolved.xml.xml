@@ -4,7 +4,7 @@
 		module="esgapp$sources_javadoc"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20190227195114"
+		publication="20190227213324"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
