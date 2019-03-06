@@ -605,19 +605,11 @@ Sidebar.prototype.addESGNamePalette = function(expand){
 	inner.style.textOverflow = 'clip';
 	inner.style.paddingBottom = '8px';
 	inner.style.cursor = 'default';
-
-	var input = document.createElement('input');
-	input.setAttribute('placeholder', mxResources.get('enterName'));
-	input.setAttribute('type', 'text');
-	input.style.fontSize = '12px';
-	input.style.overflow = 'hidden';
-	input.style.boxSizing = 'border-box';
-	input.style.border = 'solid 1px #d5d5d5';
-	input.style.borderRadius = '4px';
-	input.style.width = '100%';
-	input.style.outline = 'none';
-	input.style.padding = '6px';
-	inner.appendChild(input);
+    
+	var esgnameText = document.createElement("input");
+	esgnameText.setAttribute('type', 'text');
+	esgnameText.setAttribute('placeholder', 'Enter esg name');
+    inner.appendChild(esgnameText);
 	
 
 	var cross = document.createElement('img');
@@ -628,7 +620,7 @@ Sidebar.prototype.addESGNamePalette = function(expand){
 	
 
     // Workaround for blocked text selection in Editor
-    mxEvent.addListener(input, 'mousedown', function(evt)
+    mxEvent.addListener(esgnameText, 'mousedown', function(evt)
     {
     	if (evt.stopPropagation)
     	{
@@ -650,7 +642,7 @@ Sidebar.prototype.addESGNamePalette = function(expand){
 	this.palettes['esgname'] = [elt, outer];
 	mxEvent.addListener(cross, 'click', function()
 			{
-		    esgname = input.value;
+		    esgname = esgnameText.value;
 		    console.log(esgname);
 		    });
 	
