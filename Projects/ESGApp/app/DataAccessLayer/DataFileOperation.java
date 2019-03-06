@@ -26,7 +26,10 @@ import models.Root;
 import models.Vertex;
 
 public class DataFileOperation {
-
+	
+	//TODO convert ESG data to string
+	//TODO getrootname??
+	
 	//write to json
 	public void writeToFile(String jsonText,String fileName)
 	{
@@ -53,17 +56,22 @@ public class DataFileOperation {
 		return idNode.intValue();
 	}
 
-	//read data JSON file
+	
+	
+	
+	//TODO
 	//@SuppressWarnings("deprecation")
 	public void addJsonFileToList(JsonNode rootJson, Root root, List<Root> roots) throws Exception, IOException
 	{
+		//eger subgrap varsa aynı graphın icine graph eklemeye devam etmeli subgraphıyla beraber
+		//rootu while a alabilirsin iter.hasnext gibi
 		JsonNode rootNode=rootJson;
 		JsonNode idNode=rootNode.path("id");
 		JsonNode nameNode=rootNode.path("name");
 		JsonNode xmlFile=rootNode.path("xmlVersion");
 		JsonNode verticesNode=rootNode.path("vertices");
 		Iterator<JsonNode> itr=verticesNode.elements();
-
+		//
 		while (itr.hasNext()) {
 			JsonNode vertexNode=itr.next();
 

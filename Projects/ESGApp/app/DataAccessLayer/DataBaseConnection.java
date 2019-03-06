@@ -27,6 +27,13 @@ import models.Vertex;
 
 public class DataBaseConnection {
 
+	//TODO readESGfromDBden 
+	//TODO DBden bisi getirirken 3 ayri kosulla getirecek
+		//TODO 1. tum listeyi getir.
+		//TODO 2. ismi su olan graphi getir
+		//TODO 3. isminde su gecen graphlari getir.
+
+	
 	@SuppressWarnings({ "deprecation", "resource" })
 	public DBCollection connectDB()
 	{

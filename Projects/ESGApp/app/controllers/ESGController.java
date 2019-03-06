@@ -23,6 +23,8 @@ import play.mvc.Result;
 
 public class ESGController extends Controller{
 ///
+	//TODO send responsejson file as a string to turkan
+	
 	private DataBaseConnection dbConnection=new DataBaseConnection();
 	private DataFileOperation fileOperation=new DataFileOperation();
 	private List<Root> rootList=new ArrayList<>();
@@ -116,7 +118,7 @@ public class ESGController extends Controller{
         return "Photo of "+name+" retrieved and stored at "+filename + "\n "+c.toString();
     }
 
-	public Root isTheSameRoot(List<Root> rootList,JsonNode rootJson)
+	public Root isTheSameRoot(List<Root> rootList,JsonNode rootJson)///name ve idye göre 
 	{
 		Root root=null;
 		for(Root r:rootList)
