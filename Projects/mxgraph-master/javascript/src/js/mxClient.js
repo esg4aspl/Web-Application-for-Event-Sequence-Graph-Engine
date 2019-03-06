@@ -705,6 +705,7 @@ if (mxForceIncludes || !(typeof module === 'object' && module.exports != null))
 	mxClient.include(mxClient.basePath+'/js/shape/mxEllipse.js');
 	mxClient.include(mxClient.basePath+'/js/shape/mxSquareEllipse.js');
 	mxClient.include(mxClient.basePath+'/js/shape/mxDoubleEllipse.js');
+	mxClient.include(mxClient.basePath+'/js/shape/mxDashedEllipse.js');
 	mxClient.include(mxClient.basePath+'/js/shape/mxRhombus.js');
 	mxClient.include(mxClient.basePath+'/js/shape/mxPolyline.js');
 	mxClient.include(mxClient.basePath+'/js/shape/mxArrow.js');

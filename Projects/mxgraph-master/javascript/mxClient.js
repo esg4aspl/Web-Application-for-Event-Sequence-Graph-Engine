@@ -8403,6 +8403,8 @@ var mxUtils =
     
 	
 	SHAPE_SQUARE_ELLIPSE: 'squareEllipse',
+	
+	SHAPE_DASHED_ELLIPSE: 'dashedEllipse',
 	/**
 	 * Variable: SHAPE_RHOMBUS
 	 * 

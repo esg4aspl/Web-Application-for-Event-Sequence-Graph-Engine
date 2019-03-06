@@ -3013,6 +3013,7 @@ EditorUi.prototype.createDivs = function()
 	
 	if (!this.editor.chromeless)
 	{
+		
 		this.tabContainer = this.createTabContainer();
 	}
 	else
@@ -3517,15 +3518,19 @@ EditorUi.prototype.save = function(name)
 		}
 	}
 };
+
 //JSON File here
-//JSON File creating
 EditorUi.prototype.sendJSON = function(){ 
+	
 	var graph = this.editor.graph;
 	var model = graph.getModel();
     var cell = model.getCell(1);
     var root = model.getRoot(cell);
     
-  
+    var enc = new mxCodec();
+    var node = enc.encode(model);
+    var xmlString = (new XMLSerializer()).serializeToString(node);
+    console.log(xmlString);
     //In all graph model, there are cell0 and cell1
     
     var cellSize = (model.getDescendants(root)).length;
@@ -3535,33 +3540,91 @@ EditorUi.prototype.sendJSON = function(){
     	cells.push(model.getCell(c));
     }
   
-	var vertices  =[] ;
-	var edges =[];
+	var graphVertices  =[] ;
+	var graphEdges =[];
 	
-		for( var i = 2 ; i < cellSize ; i++){
-		/*	if(cells[i] == null){
-				cells[i] = cells[i+1];
-				alert(cells[i].style);
-			}*/
-		
-			if(cells[i].isVertex()){
-				vertices.push(cells[i]);
-				}
-			else
-			{
-				edges.push(cells[i]);
+	   for( var i = 2 ; i < cellSize ; i++){
+	       if(cells[i] ==  null){
+	    	   alert("vertex or edge is null");
+	       }
+			
+		   if(cells[i].isVertex()){
+				graphVertices.push(cells[i]);
+		   }
+		   else if(cells[i].isEdge())
+		   {
+				graphEdges.push(cells[i]);
+		   }
+		   else{
+				alert("AAAA");
 			}
+			
 		}
 		
-		for(var k = 0; k < vertices.length; k++){
-			vertices[k].setId(k);
+		for(var k = 0; k < graphVertices.length; k++){
+			graphVertices[k].setId(k);
 		}
 			
-		for(var j = 0; j < edges.length;j++){
-			edges[j].setId(j);
+		for(var j = 0; j < graphEdges.length;j++){
+			graphEdges[j].setId(j);
 		}
+		
+		var today = new Date();
+		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		var dateTime = date+' '+time;
+		
+		console.log(dateTime);
+		var ESG = { ID : 1, name :  this.sidebar.getESGName(),xmlVersion:xmlString,vertices:[],edges:[]};
+	    
+	
+		for(var i in graphVertices){
+	    	
+			var vertex = graphVertices[i];
+			
+	    	ESG.vertices.push({
+	    		"ID" : vertex.getId(),
+	    		"event" :vertex.getValue()
+	    	});
+	    }
+	    for(var k = 0; k < graphEdges.length; k++){
+	    	var edge = graphEdges[k];
+	    	if(edge.source == null || edge.target == null){
+	    		alert("Draw ESG again");
+	    		
+	    	}
+	    	else{
+	    		ESG.edges.push({
+		    		"ID" : edge.getId(),
+		    		"source" :edge.source.getId(),
+		    		"target" :edge.target.getId()
+		    	});
+	    	}
+	    	
+	    }
+	   
+
+        var jsonhttp = new XMLHttpRequest();   // new HttpRequest instance 
+	    var url = 'http://localhost:9000/sendJson';
+	    jsonhttp.open('POST',url,true);
+        
+	    jsonhttp.setRequestHeader("Content-Type", "application/json");
+	    jsonhttp.onreadystatechange =  function(){
+    	  var DONE = 4;
+    	  var OK = 200;
+    	  if(jsonhttp.readyState === DONE){
+    		  if(jsonhttp.status === OK){
+    			  alert(jsonhttp.responseText);
+    			  
+    		  }else{
+    			  alert("Error" + jsonhttp.status);
+    		  }
+    	  }
+       };
+       jsonhttp.send(JSON.stringify(ESG));
+ 
        
-  
+	   
 };
 /**
  * Executes the given layout.

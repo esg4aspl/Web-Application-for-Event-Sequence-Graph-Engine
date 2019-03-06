@@ -84,13 +84,19 @@ function Sidebar(editorUi, container)
 Sidebar.prototype.init = function()
 {
 	var dir = STENCIL_PATH;
+	this.addESGNamePalette(true);
 	this.addGeneralPalette(true);
+	this.addTreePalette(true);
 
+    
 };
+
+
 
 /**
  * Sets the default font size.
  */
+
 Sidebar.prototype.collapsedImage = (!mxClient.IS_SVG) ? IMAGE_PATH + '/collapsed.gif' : 'data:image/gif;base64,R0lGODlhDQANAIABAJmZmf///yH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozNUQyRTJFNjZGNUYxMUU1QjZEOThCNDYxMDQ2MzNCQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozNUQyRTJFNzZGNUYxMUU1QjZEOThCNDYxMDQ2MzNCQiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjFERjc3MEUxNkY1RjExRTVCNkQ5OEI0NjEwNDYzM0JCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjFERjc3MEUyNkY1RjExRTVCNkQ5OEI0NjEwNDYzM0JCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAAAQAsAAAAAA0ADQAAAhSMj6lrwAjcC1GyahV+dcZJgeIIFgA7';
 
 /**
@@ -107,6 +113,7 @@ Sidebar.prototype.tooltipImage = (!mxClient.IS_SVG) ? IMAGE_PATH + '/tooltip.png
  * 
  */
 Sidebar.prototype.searchImage = (!mxClient.IS_SVG) ? IMAGE_PATH + '/search.png' : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAEaSURBVHjabNGxS5VxFIfxz71XaWuQUJCG/gCHhgTD9VpEETg4aMOlQRp0EoezObgcd220KQiXmpretTAHQRBdojlQEJyukPdt+b1ywfvAGc7wnHP4nlZd1yKijQW8xzNc4Su+ZOYfQ3T6/f4YNvEJYzjELXp4VVXVz263+7cR2niBxAFeZ2YPi3iHR/gYERPDwhpOsd6sz8x/mfkNG3iOlWFhFj8y89J9KvzGXER0GuEaD42mgwHqUtoljbcRsTBCeINpfM/MgZLKPpaxFxGbOCqDXmILN7hoJrTKH+axhxmcYRxP0MIDnOBDZv5q1XUNIuJxifJp+UNV7t7BFM6xeic0RMQ4Bpl5W/ol7GISx/eEUUTECrbx+f8A8xhiZht9zsgAAAAASUVORK5CYII=';
+
 
 /**
  * 
@@ -572,6 +579,79 @@ Sidebar.prototype.cloneCell = function(cell, value)
 	
 	return clone;
 };
+var esgname = null;
+//get esg name from text area
+Sidebar.prototype.addESGNamePalette = function(expand){
+	var elt = document.createElement('div');
+	elt.style.visibility = 'hidden';
+	this.container.appendChild(elt);
+		
+	var div = document.createElement('div');
+	div.className = 'geSidebar';
+	div.style.boxSizing = 'border-box';
+	div.style.overflow = 'hidden';
+	div.style.width = '100%';
+	div.style.padding = '8px';
+	div.style.paddingTop = '14px';
+	div.style.paddingBottom = '0px';
+
+	if (!expand)
+	{
+		div.style.display = 'none';
+	}
+	
+	var inner = document.createElement('div');
+	inner.style.whiteSpace = 'nowrap';
+	inner.style.textOverflow = 'clip';
+	inner.style.paddingBottom = '8px';
+	inner.style.cursor = 'default';
+    
+	var esgnameText = document.createElement("input");
+	esgnameText.setAttribute('type', 'text');
+	esgnameText.setAttribute('placeholder', 'Enter esg name');
+    inner.appendChild(esgnameText);
+	
+
+	var cross = document.createElement('img');
+	cross.setAttribute('src', Sidebar.prototype.searchImage);
+	
+	cross.style.position = 'relative';
+	cross.style.left = '-18px';
+	
+
+    // Workaround for blocked text selection in Editor
+    mxEvent.addListener(esgnameText, 'mousedown', function(evt)
+    {
+    	if (evt.stopPropagation)
+    	{
+    		evt.stopPropagation();
+    	}
+    	
+    	evt.cancelBubble = true;
+    });
+	
+
+    inner.appendChild(cross);
+    div.appendChild(inner);
+  
+	var outer = document.createElement('div');
+    outer.appendChild(div);
+    this.container.appendChild(outer);
+    
+    // Keeps references to the DOM nodes
+	this.palettes['esgname'] = [elt, outer];
+	mxEvent.addListener(cross, 'click', function()
+			{
+		    esgname = esgnameText.value;
+		    console.log(esgname);
+		    });
+	
+};
+Sidebar.prototype.getESGName = function(){
+	return esgname;
+}
+
+
 
 /**
  * Adds shape search UI.
@@ -873,7 +953,6 @@ Sidebar.prototype.cloneCell = function(cell, value)
     // Keeps references to the DOM nodes
 	this.palettes['search'] = [elt, outer];
 };*/
-
 /**
  * Adds the general palette to the sidebar.
  */
@@ -905,11 +984,179 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 		this.createVertexTemplateEntry('ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;', 100, 60, '', 'Double Ellipse', null, null, 'oval ellipse start end state double'),
  	    this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 0, '', 'Directional Connector', null, lineTags + 'directional directed'),
  		this.createVertexTemplateEntry('shape=squareEllipse;whiteSpace=wrap;html=1;', 100, 60, '', 'Square Ellipse', null, null, 'square ellipse'),
- 	//this.createEdgeTemplateEntry('endArrow=classic;startArrow=classic;html=1;', 50, 50, '', 'Bidirectional Connector', null, lineTags + 'bidirectional')
+ 		this.createVertexTemplateEntry('shape=dashedEllipse;whiteSpace=wrap;html=1;', 120, 80, '', 'Dashed Ellipse', null, null,'dashed ellipse')
  		
  		];
 	
 	this.addPaletteFunctions('general', mxResources.get('general'), (expand != null) ? expand : true, fns);
+};
+
+// adds the tree palette to the sidebar
+Sidebar.prototype.addTreePalette = function(expand){
+	var buttonDiv = document.createElement('div');
+	buttonDiv.style.boxSizing = 'border-box';
+	buttonDiv.style.overflow = 'hidden';
+	buttonDiv.style.width = '100%';
+	buttonDiv.style.padding = '50px';
+	buttonDiv.style.paddingTop = '14px';
+	buttonDiv.style.paddingBottom = '0px';
+	buttonDiv.style.backgroundColor = 'lightgrey';
+	this.container.appendChild(buttonDiv);
+	
+	 var div = document.createElement('div');
+	 var btnShowTree = mxUtils.button(mxResources.get('tree'), function(evt){
+		    div.style.width = '100%';
+	   		div.style.padding = '50px';
+	   		div.style.paddingTop = '14px';
+	   		div.style.paddingBottom = '0px';
+	   		div.style.backgroundColor = 'white';
+	   		
+	   		var mainUl = document.createElement('ul');
+	   		mainUl.setAttribute('id','mainUl');
+	   		
+	   		div.appendChild(mainUl);
+	   		
+	   		var mainLi = document.createElement('li');
+	   		
+	   		var firstSpan = document.createElement('span');
+	   		firstSpan.setAttribute('class','caret');
+	   		var firstSpanText = document.createTextNode(esgname);
+	   		firstSpan.appendChild(firstSpanText);
+	   		firstSpan.style.cursor = 'pointer';
+	   		mainLi.appendChild(firstSpan);
+	   		mainUl.appendChild(mainLi);
+	   		
+	   		var secondUl = document.createElement('ul');
+	   		secondUl.setAttribute('class','nested');
+	        secondUl.style.display = 'none';
+	      
+	        
+	   		
+	   		
+	   		var secondLi = document.createElement('li');
+	   		var secondLiText = document.createTextNode("sub");
+	   		secondLi.appendChild(secondLiText);
+	   		secondUl.appendChild(secondLi);
+	   		mainLi.appendChild(secondUl);
+	   		
+	   		var toggler = document.getElementsByClassName("caret");
+	   		console.log(toggler.length);
+	   		
+	   	    toggler[0].addEventListener("click", function() {
+	   	    var nested=  this.parentElement.querySelector(".nested");
+	   	    if(nested.style.display == 'none'){
+	   	    	nested.style.display = 'block';
+	   	    }else{
+	   	    	nested.style.display = 'none';
+	   	    }
+	   	 //   console.log(this.parentElement.querySelector(".nested"));
+	   	   });
+	   		
+	   		
+/*	   		var btnShowSubs = document.createElement('button');
+	   		btnShowSubs.setAttribute('class','collapsible');
+	   		var subText = document.createTextNode("main");
+	   		btnShowSubs.appendChild(subText);
+	   		div.appendChild(btnShowSubs);
+	   		
+	   		var newDiv = document.createElement('div');
+	   		newDiv.setAttribute('class','content');
+	   		var para = document.createElement('p');
+	   		var t = document.createTextNode("KJADGDJHAGFJAFGAHGSD");
+	   		para.appendChild(t);
+	   		newDiv.appendChild(para);
+	   		newDiv.style.display = 'none';
+	   		div.appendChild(newDiv);
+	   		
+	   		var coll = document.getElementsByClassName("collapsible");
+	   		var i;
+            console.log(coll.length);
+            console.log(coll[0].nextElementSibling);
+	   	//	for (i = 0; i < coll.length; i++) {
+	   	   coll[0].addEventListener("click", function() {
+	   			  
+	   			var content = coll[0].nextElementSibling;
+	   			console.log(content);
+	   		    if (content.style.display === "block") {
+	   		      content.style.display = "none";
+	   		    } else {
+	   		      content.style.display = "block";
+	   		    }
+	   		  });
+	   		//}
+	   		*/
+		 
+	 });
+	     buttonDiv.appendChild(btnShowTree);
+	     this.container.appendChild(div);
+
+
+	
+	 /*	 var btnShowTree = mxUtils.button(mxResources.get('tree'), function(evt){
+		 div.style.width = '100%';
+	   		div.style.padding = '50px';
+	   		div.style.paddingTop = '14px';
+	   		div.style.paddingBottom = '0px';
+	   		div.style.backgroundColor = 'grey';
+	   		
+	 
+
+	
+    //show tree button
+    var btnShowTree = mxUtils.button(mxResources.get('tree'), function(evt){
+    	div.style.width = '100%';
+   		div.style.padding = '50px';
+   		div.style.paddingTop = '14px';
+   		div.style.paddingBottom = '0px';
+   		div.style.backgroundColor = 'grey';
+   		
+ 		var mainUl = document.createElement('ul');
+   		mainUl.setAttribute('id','mainUl');
+   		
+   		var mainLi = document.createElement('li');
+   		var firstSpan = document.createElement('span');
+   		firstSpan.setAttribute('class','caret');
+   		var firstSpanText = document.createTextNode("Main");
+   		firstSpan.appendChild(firstSpanText);
+   		firstSpan.style.cursor = 'pointer';
+   		mainLi.appendChild(firstSpan);
+   		
+   		var secondUl = document.createElement('ul');
+   		secondUl.setAttribute('class','nested');
+   		secondUl.style.display = 'none';
+   		
+   		mainLi.appendChild(secondUl);
+   		
+   	    mainUl.appendChild(mainLi);
+   		var secondLi = document.createElement('li');
+   		var secondLiText = document.createElement("Water");
+   		secondLi.appendChild(secondLiText);
+   		var el = document.getElementsByClassName('caret');
+
+   		el.onclick = function() {
+   		  console.log('clicked!');
+   		}
+
+   		var toggler = document.getElementsByClassName("firstSpan");
+   		var i;
+   		console.log(toggler.length);
+        
+   		for (i = 0; i < toggler.length; i++) {
+   			console.log(toggler[i]);
+   
+   		  
+   		}
+   		
+   		
+
+    
+     buttonDiv.appendChild(btnShowTree);
+     this.container.appendChild(div);
+     
+    	 
+	*/
+	
+
 };
 
 /**
