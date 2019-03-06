@@ -98,14 +98,16 @@
 	
 	//all esgs from api
 	function getAllEsg(){
-		
+		console.log("bbb");
 		    var xhr = new XMLHttpRequest();
-		    var url =  'https://api.tvmaze.com/shows';
-		    xhr.open('GET',url, true);
+		    var url =  'http://localhost:9000/readData';
+		    console.log("bbb");
+		    xhr.open('POST',url, true);
 		    var i;
 		    var div = document.createElement('div');
 		    var esgListUl = document.createElement('ul');
 		    xhr.onreadystatechange = function () {
+		    	console.log("aaaa");
 		    	  if(xhr.readyState === 4 && xhr.status === 200) {
 		    	    console.log(xhr.responseText);
 		    	    var infos = JSON.parse(xhr.responseText);
@@ -113,7 +115,7 @@
 		    	    	var esgListIl = document.createElement('li');
 		    	    	var esgListText = document.createTextNode(infos[i].name);
 		    	    	esgListIl.appendChild(esgListText);
-		    	   
+		    	        
 		    	    	esgListUl.appendChild(esgListIl);
 		    	    }
 		    	    div.appendChild(esgListUl);

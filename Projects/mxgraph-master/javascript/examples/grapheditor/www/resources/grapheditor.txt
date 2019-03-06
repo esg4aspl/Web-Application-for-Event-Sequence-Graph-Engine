@@ -1,7 +1,6 @@
 # Resources from graph.properties
 alreadyConnected=Nodes already connected
 
-cancel=Cancel
 close=Close
 collapse-expand=Collapse/Expand
 containsValidationErrors=Contains validation errors
@@ -115,10 +114,12 @@ exitGroup=Exit Group
 expand=Expand
 export=Export
 extras=Extras
+find=Find
 file=File
 fileNotFound=File not found
 filename=Filename
 fill=Fill
+find=Find
 fillColor=Fill Color
 fitPage=One Page
 fitPageWidth=Page Width
@@ -144,6 +145,7 @@ formatXml=XML
 formatted=Formatted
 formattedText=Formatted Text
 gap=Gap
+getall= Get All
 glass=Glass
 general=General
 global=Global
