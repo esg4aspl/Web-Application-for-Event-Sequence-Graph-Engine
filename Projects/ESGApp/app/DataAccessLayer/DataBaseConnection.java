@@ -40,7 +40,9 @@ public class DataBaseConnection {
 			esg+=cursor.next();
 			esg+=",";
 		}
-		return esg+"]";
+		//esg.replace(),"");
+		
+		return esg;
 	}
 	//TODO DBden bisi getirirken 3 ayri kosulla getirecek
 		//TODO 1. tum listeyi getir.
