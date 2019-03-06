@@ -36,18 +36,20 @@
 	// Handles form-submit by preparing to process response
 	function handleSubmit()
 	{
+		
 		var form = window.openForm || document.getElementById('openForm');
 		
 		// Checks for support of the File API for local file access
 		// except for files where the parse is on the server
-		if (window.parent.Graph.fileSupport && form.upfile.files.length > 0)
+	/*	if (window.parent.Graph.fileSupport && form.upfile.files.length > 0)
 		{
 			handleFiles(form.upfile.files);
 			
 			return false;
 		}
-		else
-		{
+		else*/
+		//{
+			//console.log(form);
 			if (/(\.xml)$/i.test(form.upfile.value) || /(\.txt)$/i.test(form.upfile.value) ||
 				/(\.mxe)$/i.test(form.upfile.value))
 			{
@@ -68,7 +70,7 @@
 				
 				return false;
 			}
-		}
+		//}
 	};
 	
 	// Hides this dialog
@@ -77,12 +79,13 @@
 		window.parent.openFile.cancel(cancel);
 	}
 	
-	function fileChanged()
+	/*function fileChanged()
 	{
 		var form = window.openForm || document.getElementById('openForm');
 		var openButton = document.getElementById('openButton');
-		
-		if (form.upfile.value.length > 0)
+		console.log("jhgfhasghagf");
+	//	console.log(form.upfile);
+	/*	if (form.upfile.value.length > 0)
 		{
 			openButton.removeAttribute('disabled');
 		}
@@ -90,8 +93,50 @@
 		{
 			openButton.setAttribute('disabled', 'disabled');
 		}		
-	}
-
+	}*/
+	
+	
+	//all esgs from api
+	function getAllEsg(){
+		
+		    var xhr = new XMLHttpRequest();
+		    var url =  'https://api.tvmaze.com/shows';
+		    xhr.open('GET',url, true);
+		    var i;
+		    var div = document.createElement('div');
+		    var esgListUl = document.createElement('ul');
+		    xhr.onreadystatechange = function () {
+		    	  if(xhr.readyState === 4 && xhr.status === 200) {
+		    	    console.log(xhr.responseText);
+		    	    var infos = JSON.parse(xhr.responseText);
+		    	    for(i = 0;i<infos.length;i++){
+		    	    	var esgListIl = document.createElement('li');
+		    	    	var esgListText = document.createTextNode(infos[i].name);
+		    	    	esgListIl.appendChild(esgListText);
+		    	   
+		    	    	esgListUl.appendChild(esgListIl);
+		    	    }
+		    	    div.appendChild(esgListUl);
+		    	    document.body.appendChild(div);
+					 
+		    	  }
+		    	};
+		    	 
+		    xhr.send();
+		  };
+		  
+		//after click find button   
+    function findEsg(){
+    	var div = document.createElement('div');
+    	var filterTextArea = document.createElement("input");
+    	filterTextArea.setAttribute('type', 'text');
+    	filterTextArea.setAttribute('placeholder', 'Enter esg name');
+    	div.appendChild(filterTextArea);
+    	document.body.appendChild(div);
+    };
+    
+    
+    
 	function main()
 	{
 		if (window.parent.Editor.useLocalStorage)
@@ -182,13 +227,19 @@
 		}
 		else
 		{
+			var findButton =  document.getElementById('findButton');
+			findButton.value = window.parent.mxResources.get('find');
+			
+			var getAllButton = document.getElementById('getAllButton');
+			getAllButton.value = window.parent.mxResources.get('getall');
+			
 			var editLink = document.getElementById('editLink');
-			var openButton = document.getElementById('openButton');
-			openButton.value = window.parent.mxResources.get(window.parent.openKey || 'open');
-			var cancelButton = document.getElementById('cancelButton');
-			cancelButton.value = window.parent.mxResources.get('cancel');
-			var supportedText = document.getElementById('openSupported');
-			supportedText.innerHTML = window.parent.mxResources.get('openSupported');
+		//	var openButton = document.getElementById('openButton');
+		//	openButton.value = window.parent.mxResources.get(window.parent.openKey || 'open');
+		//	var cancelButton = document.getElementById('cancelButton');
+		//	cancelButton.value = window.parent.mxResources.get('cancel');
+		//	var supportedText = document.getElementById('openSupported');
+			//supportedText.innerHTML = window.parent.mxResources.get('openSupported');
 			var form = window.openForm || document.getElementById('openForm');
 
 			form.setAttribute('action', window.parent.OPEN_URL);
@@ -201,10 +252,12 @@
 <table style="width:100%;">
 <tr>
 <td style="height:40px;vertical-align:top;" colspan="2">
-<input type="file" name="upfile" onchange="fileChanged()">
+<input type="button" id="findButton" class="geBtn" value="Find" onclick="findEsg()">
+<input type="button" id="getAllButton" class="geBtn gePrimaryBtn" value="Get All" onclick="getAllEsg()">
+<!-- <input type="file" name="upfile" onchange="fileChanged()"> -->
 </td>
 </tr>
-<tr>
+<!--<tr>
 <td colspan="2" height="120px" id="openSupported" style="font-family:arial;color:grey;font-size:9pt;vertical-align:top;text-align:left;">
 </td>
 </tr>
@@ -212,10 +265,10 @@
 <td>
 </td>
 <td style="vertical-align:middle;text-align:right;white-space:nowrap;">
-<input type="button" id="cancelButton" class="geBtn" value="Cancel" onclick="hideWindow(true);">
-<input type="submit" id="openButton" class="geBtn gePrimaryBtn" value="Open" disabled="disabled">
+<input type="button" id="cancelButton" class="geBtn" value="xxx" onclick="hideWindow(true);"> 
+<input type="submit" id="openButton" class="geBtn gePrimaryBtn" value="Open" disabled="disabled" > 
 </td>
-</tr>
+</tr>-->
 </table>
 </form>
 </body>
