@@ -27,7 +27,7 @@ public class ESGController extends Controller{
 ///
 	//TODO  searching
 	//TODO save as the graph with new name as a new graph in the db.
-	// TODO return the case file to json
+	//TODO return the case file to json
 	
 	private DataBaseConnection dbConnection=new DataBaseConnection();
 	private DataFileOperation fileOperation=new DataFileOperation();
