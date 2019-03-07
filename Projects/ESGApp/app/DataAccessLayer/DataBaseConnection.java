@@ -29,7 +29,12 @@ import play.libs.Json;
 
 public class DataBaseConnection {
 
-	//TODO readESGfromDBden 
+	//TODO DBden bisi getirirken 2 ayri kosulla getirecek
+			//TODO is done
+			//TODO 2.isminde su gecen graphlari getir.
+	//TODO graphin ismi değistirildi mesela onu update yaomayacak save as gibi yeni bir idli yeni bir graph ekleyecek. 
+
+	//1. tum listeyi getir. readESGfromDBden 
 	public String readDataFromDB()
 	{
 		String esg = "[";
@@ -40,13 +45,11 @@ public class DataBaseConnection {
 			esg+=cursor.next();
 			esg+=",";
 		}
-		return esg+"]";
+		//esg.replace(),"");
+		
+		return esg;
 	}
-	//TODO DBden bisi getirirken 3 ayri kosulla getirecek
-		//TODO 1. tum listeyi getir.
-		//TODO 2. ismi su olan graphi getir
-		//TODO 3. isminde su gecen graphlari getir.
-
+	
 	
 	@SuppressWarnings({ "deprecation", "resource" })
 	public DBCollection connectDB()

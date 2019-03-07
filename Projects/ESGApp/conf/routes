@@ -19,7 +19,7 @@ GET     /welcome/:name/:lastName    controllers.HomeController.welcomeName(name:
 POST	/saveESGToDB				controllers.ESGController.saveESGToDB()
 POST	/sendJson					controllers.ESGController.saveESGToDB()
 GET	/saveJPEG					controllers.ESGController.saveJPEGToDB()
-
+POST	/readData					controllers.ESGController.readData()
 #3 tane route olucak. turkanin requestlerini search yapmak istedigi parametreye gore dondurecek.
 ##1 tum listeyi getirmesi
 ##2 isme gore getirmesi
