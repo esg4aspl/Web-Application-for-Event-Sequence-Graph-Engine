@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -24,9 +25,32 @@ import com.mongodb.gridfs.GridFSInputFile;
 import models.Edge;
 import models.Root;
 import models.Vertex;
+import play.libs.Json;
 
 public class DataBaseConnection {
 
+	//TODO DBden bisi getirirken 2 ayri kosulla getirecek
+			//TODO is done
+			//TODO 2.isminde su gecen graphlari getir.
+	//TODO graphin ismi değistirildi mesela onu update yaomayacak save as gibi yeni bir idli yeni bir graph ekleyecek. 
+
+	//1. tum listeyi getir. readESGfromDBden 
+	public String readDataFromDB()
+	{
+		String esg = "[";
+		DBCollection collection= connectDB();
+		DBCursor cursor= collection.find();
+		while(cursor.hasNext())
+		{
+			esg+=cursor.next();
+			esg+=",";
+		}
+		//esg.replace(),"");
+		
+		return esg;
+	}
+	
+	
 	@SuppressWarnings({ "deprecation", "resource" })
 	public DBCollection connectDB()
 	{

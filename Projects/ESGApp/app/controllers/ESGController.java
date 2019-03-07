@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.Binary;
+import org.codehaus.jackson.map.deser.std.JsonNodeDeserializer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.mongodb.BasicDBObject;
@@ -18,16 +19,28 @@ import com.mongodb.DBObject;
 import DataAccessLayer.DataBaseConnection;
 import DataAccessLayer.DataFileOperation;
 import models.Root;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
 public class ESGController extends Controller{
 ///
+	//TODO  searching
+	//TODO save as the graph with new name as a new graph in the db.
+	//TODO return the case file to json
+	
 	private DataBaseConnection dbConnection=new DataBaseConnection();
 	private DataFileOperation fileOperation=new DataFileOperation();
 	private List<Root> rootList=new ArrayList<>();
 	private List<String> graphList;
 
+	// send responsejson file as a string to turkan. get data from db
+	public Result readData()
+	{
+		String esgJson=	dbConnection.readDataFromDB();
+		esgJson=(esgJson.substring(0, esgJson.length()-1))+"]";
+		return ok(esgJson);
+	}
 	public Result saveESGToDB() throws Exception
 	{
 		graphList=dbConnection.getItems();
@@ -116,7 +129,7 @@ public class ESGController extends Controller{
         return "Photo of "+name+" retrieved and stored at "+filename + "\n "+c.toString();
     }
 
-	public Root isTheSameRoot(List<Root> rootList,JsonNode rootJson)
+	public Root isTheSameRoot(List<Root> rootList,JsonNode rootJson)///name ve idye göre 
 	{
 		Root root=null;
 		for(Root r:rootList)

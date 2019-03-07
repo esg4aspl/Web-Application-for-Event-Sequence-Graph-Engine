@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Root {
+	//TODO bir ESG nin subESGsi olabilir.
 	private String name;
 	private Integer id;
 	private String xmlFileString;
