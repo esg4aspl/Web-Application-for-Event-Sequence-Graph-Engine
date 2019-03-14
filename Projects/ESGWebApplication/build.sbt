@@ -1,4 +1,4 @@
-name := """ESG"""
+name := """ESGWebApplication"""
 
 version := "1.0-SNAPSHOT"
 
