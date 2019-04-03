@@ -465,6 +465,7 @@ Editor.prototype.readGraphState = function(node)
  */
 Editor.prototype.setGraphXml = function(node)
 {
+	console.log("editor set graphxml");
 	if (node != null)
 	{
 		var dec = new mxCodec(node.ownerDocument);

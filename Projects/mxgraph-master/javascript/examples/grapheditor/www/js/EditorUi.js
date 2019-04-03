@@ -2180,6 +2180,7 @@ EditorUi.prototype.onBeforeUnload = function()
  */
 EditorUi.prototype.open = function()
 {
+	console.log("open function");
 	// Cross-domain window access is not allowed in FF, so if we
 	// were opened from another domain then this will fail.
 	try
@@ -3329,6 +3330,7 @@ EditorUi.prototype.pickColor = function(color, apply)
  */
 EditorUi.prototype.openFile = function()
 {
+	console.log("open file function");
 	// Closes dialog after open
 	window.openFile = new OpenFile(mxUtils.bind(this, function(cancel)
 	{
@@ -3518,14 +3520,16 @@ EditorUi.prototype.save = function(name)
 	}
 };
 //JSON File here
-//JSON File creating
 EditorUi.prototype.sendJSON = function(){ 
 	var graph = this.editor.graph;
 	var model = graph.getModel();
     var cell = model.getCell(1);
     var root = model.getRoot(cell);
     
-  
+    var enc = new mxCodec();
+    var node = enc.encode(model);
+    var xmlString = (new XMLSerializer()).serializeToString(node);
+    console.log(xmlString);
     //In all graph model, there are cell0 and cell1
     
     var cellSize = (model.getDescendants(root)).length;
@@ -3535,33 +3539,110 @@ EditorUi.prototype.sendJSON = function(){
     	cells.push(model.getCell(c));
     }
   
-	var vertices  =[] ;
-	var edges =[];
+	var graphVertices  =[] ;
 	
-		for( var i = 2 ; i < cellSize ; i++){
-		/*	if(cells[i] == null){
-				cells[i] = cells[i+1];
-				alert(cells[i].style);
-			}*/
-		
-			if(cells[i].isVertex()){
-				vertices.push(cells[i]);
-				}
-			else
-			{
-				edges.push(cells[i]);
+    var graphEdges =[];
+	
+	   for( var i = 2 ; i < cellSize ; i++){
+	       if(cells[i] ==  null){
+	    	   alert("vertex or edge is null");
+	       }
+			
+		   if(cells[i].isVertex()){
+				graphVertices.push(cells[i]);
+		   }
+		   else if(cells[i].isEdge())
+		   {
+				graphEdges.push(cells[i]);
+		   }
+		   else{
+				alert("AAAA");
 			}
+			
 		}
 		
-		for(var k = 0; k < vertices.length; k++){
-			vertices[k].setId(k);
+		for(var k = 0; k < graphVertices.length; k++){
+			graphVertices[k].setId(k);
 		}
 			
-		for(var j = 0; j < edges.length;j++){
-			edges[j].setId(j);
+		for(var j = 0; j < graphEdges.length;j++){
+			graphEdges[j].setId(j);
 		}
+		
+		
+		var ESG = { ID : 1, name : "Paper: Does Depth ReallyMatter? On the of Model Refinement For Testing and Reliability Figure: 2",vertices:[],edges:[]};
+	    
+	
+		for(var i in graphVertices){
+	    	
+			var vertex = graphVertices[i];
+			
+	    	ESG.vertices.push({
+	    		"ID" : vertex.getId(),
+	    		"event" :vertex.getValue()
+	    	});
+	    }
+	    for(var k = 0; k < graphEdges.length; k++){
+	    	var edge = graphEdges[k];
+	    	
+	    	if(edge.source == null || edge.target == null){
+	    		alert("Draw ESG again");
+	    		
+	    	}
+	    	else{
+	    		ESG.edges.push({
+		    		"ID" : edge.getId(),
+		    		"source" :edge.source.getId(),
+		    		"target" :edge.target.getId()
+		    	});
+	    	}
+	    	
+	    }
+	  /*  var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST","books");
+        var xmlDoc;
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            xmlDoc = xmlhttp.responseXML;
+            console.log(xmlDoc);
+            }
+        };
+        xmlhttp.setRequestHeader('Content-Type', 'text/xml');
+        var xml = mxUtils.getXml(this.editor.getGraphXml());
+        xmlhttp.send(xml);*/
+        
        
-  
+	   
+		var fileJSON = JSON.stringify(ESG);
+		
+		console.log(fileJSON);
+	
+		/*	var http = new XMLHttpRequest();
+		var url = 'https://jsonplaceholder.typicode.com/todos/1';
+		
+		http.open('POST', url, true);
+
+		//Send the proper header information along with the request
+		http.setRequestHeader('Content-type', 'application/json');
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+		    if(http.readyState == 4 && http.status == 200) {
+		        alert(http.responseText);
+		    }
+		}
+		http.send(fileJSON);*/
+	 //   alert(fileJSON);
+	   /* var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+	    xmlhttp.open("POST", "https://api.tvmaze.com/shows");
+	    xmlhttp.setRequestHeader("Content-Type", "application/json");
+	    xmlhttp.send(fileJSON);
+	    xmlhttp.onreadystatechange = function () {
+	    	 if (xmlhttp.readyState>3 && xmlhttp.status==200) { 
+	    		 success(xmlhttp.responseText); 
+	    		 }
+	    	  
+	    	  };
+	 */
 };
 /**
  * Executes the given layout.
