@@ -84,7 +84,8 @@ function Sidebar(editorUi, container)
 Sidebar.prototype.init = function()
 {
 	var dir = STENCIL_PATH;
-	this.addGeneralPalette(true);
+//	this.addGeneralPalette(true);
+	this.addTreePalette(true);
 
 };
 
@@ -910,6 +911,21 @@ Sidebar.prototype.addGeneralPalette = function(expand)
  		];
 	
 	this.addPaletteFunctions('general', mxResources.get('general'), (expand != null) ? expand : true, fns);
+};
+//add the tree palette to the sidebar
+
+Sidebar.prototype.addTreePalette = function(expand){
+	var lineTags = 'line lines connector connectors connection connections arrow arrows ';
+	var fns = [
+
+ 		this.createVertexTemplateEntry('ellipse;whiteSpace=wrap;html=1;', 120, 80, '', 'Ellipse', null, null, 'oval ellipse state'),
+		this.createVertexTemplateEntry('ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;', 100, 60, '', 'Double Ellipse', null, null, 'oval ellipse start end state double'),
+ 	    this.createEdgeTemplateEntry('endArrow=classic;html=1;', 50, 0, '', 'Directional Connector', null, lineTags + 'directional directed'),
+ 		this.createVertexTemplateEntry('shape=squareEllipse;whiteSpace=wrap;html=1;', 100, 60, '', 'Square Ellipse', null, null, 'square ellipse'),
+ 		this.createVertexTemplateEntry('shape=dashedEllipse;whiteSpace=wrap;html=1;', 120, 80, '', 'Dashed Ellipse', null, null,'dashed ellipse')
+ 		
+ 		];
+	this.addPaletteFunctions('tree', mxResources.get('tree'), (expand != null) ? expand : true, fns);
 };
 
 /**

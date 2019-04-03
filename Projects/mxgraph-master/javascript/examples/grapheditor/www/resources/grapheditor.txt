@@ -308,6 +308,7 @@ topAlign=Top Align
 topLeft=Top Left
 topRight=Top Right
 transparent=Transparent
+tree= Show Tree
 turn=Rotate 90°
 uml=UML
 underline=Underline

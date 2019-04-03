@@ -2180,6 +2180,7 @@ EditorUi.prototype.onBeforeUnload = function()
  */
 EditorUi.prototype.open = function()
 {
+	console.log("open function");
 	// Cross-domain window access is not allowed in FF, so if we
 	// were opened from another domain then this will fail.
 	try
@@ -3329,6 +3330,7 @@ EditorUi.prototype.pickColor = function(color, apply)
  */
 EditorUi.prototype.openFile = function()
 {
+	console.log("open file function");
 	// Closes dialog after open
 	window.openFile = new OpenFile(mxUtils.bind(this, function(cancel)
 	{
