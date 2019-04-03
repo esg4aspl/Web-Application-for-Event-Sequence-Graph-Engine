@@ -4,13 +4,6 @@ public class Edge {
 	private Integer id;
 	private Integer source;
 	private Integer target;
-	public Edge(int id, int source, int target)
-	{
-		setId(id);
-		setSource(source);
-		setTarget(target);
-	}
-
 	
 	public int getId() {
 		return id;

@@ -9,10 +9,10 @@ public class ESG {
 	private String id;
 	private String name;
 	private String xmlVersion;
-	ArrayList < Object > vertices = new ArrayList < Object > ();
-	ArrayList < Object > edges = new ArrayList < Object >();
-	ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
-	ArrayList < Edge > edgeList = new ArrayList < Edge >();
+	private ArrayList < Object > vertices = new ArrayList < Object > ();
+	private ArrayList < Object > edges = new ArrayList < Object >();
+	private ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
+	private ArrayList < Edge > edgeList = new ArrayList < Edge >();
 
 	// Getter Methods 
 
