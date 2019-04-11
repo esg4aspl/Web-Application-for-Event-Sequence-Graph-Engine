@@ -18,9 +18,9 @@ GET     /welcome/:name/:lastName    controllers.HomeController.welcomeName(name:
 
 POST	/saveESG					controllers.ESGController.save()
 POST	/saveAsESG					controllers.ESGController.saveAs()
-POST	/openAll					controllers.ESGController.openAll()
-POST	/showHistoryByESGName		controllers.ESGController.showHistoryByESGName()
-POST	/openESGByName				controllers.ESGController.openESGByName()
+POST	/findExistESGs				controllers.ESGController.getExistESGs()
+POST	/showHistoryByESGName		controllers.ESGController.getHistoryByESGName()
+POST	/openESGByName				controllers.ESGController.getESGByName()
 ##POST	/sendESGNamesToUI			controllers.ESGController.sendESGNamesToUI()
 #POST	/requestedESGByNameFromUI	controllers.ESGController.requestedESGByNameFromUI()
 #POST	/findCurrent				controllers.ESGController.findCurrent()

@@ -57,7 +57,7 @@ public class ESGController extends Controller{
 		}
 	}
 
-	public Result openAll() throws ParseException, org.codehaus.jackson.JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException
+	public Result getExistESGs() throws ParseException, org.codehaus.jackson.JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException
 	{
 		String name="";
 		this.esgList = dbOperation.getAllESGList();
@@ -74,7 +74,7 @@ public class ESGController extends Controller{
 		return ok(name);
 	}
 
-	public Result showHistoryByESGName() throws JsonParseException, JsonMappingException, IOException
+	public Result getHistoryByESGName() throws JsonParseException, JsonMappingException, IOException
 	{
 		String esgName=request().body().asText();
 		String esgIdName="";
@@ -86,7 +86,7 @@ public class ESGController extends Controller{
 		return ok(esgIdName);
 	}
 
-	public Result openESGByName() throws JsonParseException, JsonMappingException, IOException, ParseException
+	public Result getESGByName() throws JsonParseException, JsonMappingException, IOException, ParseException
 	{
 		String esgName=request().body().asText();
 		ESG searchingESG = dbOperation.findESGByName(esgName);
