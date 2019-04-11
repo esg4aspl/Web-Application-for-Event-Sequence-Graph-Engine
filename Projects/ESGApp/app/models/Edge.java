@@ -1,20 +1,15 @@
 package models;
 
 public class Edge {
-	
-	public Edge(int id, int source, int target)
-	{
-		setId(id);
-		setSource(source);
-		setTarget(target);
-	}
-
 	private Integer id;
-	public Integer getId() {
+	private Integer source;
+	private Integer target;
+	
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -34,7 +29,6 @@ public class Edge {
 		this.target = target;
 	}
 
-	private Integer source;
-	private Integer target;
+	
 	
 }

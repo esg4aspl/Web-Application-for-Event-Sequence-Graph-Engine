@@ -16,10 +16,21 @@ POST	/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParse
 GET		/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParser()
 GET     /welcome/:name/:lastName    controllers.HomeController.welcomeName(name:String, lastName:String)
 
-POST	/saveESGToDB				controllers.ESGController.saveESGToDB()
-POST	/sendJson					controllers.ESGController.saveESGToDB()
-GET	/saveJPEG					controllers.ESGController.saveJPEGToDB()
-POST	/readData					controllers.ESGController.readData()
+POST	/saveESG					controllers.ESGController.save()
+POST	/saveAsESG					controllers.ESGController.saveAs()
+POST	/findExistESGs				controllers.ESGController.getExistESGs()
+POST	/getHistoryByESGName		controllers.ESGController.getHistoryByESGName()
+POST	/getESGByName				controllers.ESGController.getESGByName()
+##POST	/sendESGNamesToUI			controllers.ESGController.sendESGNamesToUI()
+#POST	/requestedESGByNameFromUI	controllers.ESGController.requestedESGByNameFromUI()
+#POST	/findCurrent				controllers.ESGController.findCurrent()
+#POST	/findNamesWithQueryMongoDB	controllers.ESGController.findNamesWithQueryMongoDB()
+
+#GET	/saveJPEG					controllers.ESGController.saveJPEGToDB()
+#POST	/readData					controllers.ESGController.readData()
+
+
+
 #3 tane route olucak. turkanin requestlerini search yapmak istedigi parametreye gore dondurecek.
 ##1 tum listeyi getirmesi
 ##2 isme gore getirmesi

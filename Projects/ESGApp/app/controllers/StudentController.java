@@ -1,4 +1,4 @@
-package controllers;
+/*package controllers;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -219,3 +219,4 @@ public class StudentController extends Controller{
 		return ok("dbconnections are done.");
 	}
 }
+*/

@@ -4,7 +4,7 @@
 		module="esgapp-build"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20190131220246"
+		publication="20190412003354"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>

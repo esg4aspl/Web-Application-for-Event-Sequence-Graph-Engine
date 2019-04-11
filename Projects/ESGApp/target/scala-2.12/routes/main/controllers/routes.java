@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGApp/conf/routes
-// @DATE:Wed Mar 06 20:07:21 EET 2019
+// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/ESGApp/conf/routes
+// @DATE:Fri Apr 12 00:34:18 EET 2019
 
 package controllers;
 

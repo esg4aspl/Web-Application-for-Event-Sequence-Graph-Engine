@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGApp/conf/routes
-// @DATE:Wed Mar 06 20:07:21 EET 2019
+// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/ESGApp/conf/routes
+// @DATE:Fri Apr 12 00:34:18 EET 2019
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -59,7 +59,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:41
+  // @LINE:52
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -67,7 +67,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:41
+    // @LINE:52
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
@@ -99,7 +99,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:32
+  // @LINE:43
   class ReverseBooksController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -107,7 +107,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:35
+    // @LINE:46
     def edit: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.BooksController.edit",
       """
@@ -117,7 +117,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:33
+    // @LINE:44
     def create: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.BooksController.create",
       """
@@ -127,7 +127,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:34
+    // @LINE:45
     def show: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.BooksController.show",
       """
@@ -137,7 +137,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:38
+    // @LINE:49
     def destroy: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.BooksController.destroy",
       """
@@ -147,7 +147,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:37
+    // @LINE:48
     def save: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.BooksController.save",
       """
@@ -157,7 +157,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:36
+    // @LINE:47
     def update: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.BooksController.update",
       """
@@ -167,7 +167,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:32
+    // @LINE:43
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.BooksController.index",
       """
@@ -237,36 +237,52 @@ package controllers.javascript {
     }
 
   
-    // @LINE:21
-    def saveJPEGToDB: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.ESGController.saveJPEGToDB",
+    // @LINE:23
+    def getESGByName: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ESGController.getESGByName",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "saveJPEG"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getESGByName"})
         }
       """
     )
   
     // @LINE:22
-    def readData: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.ESGController.readData",
+    def getHistoryByESGName: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ESGController.getHistoryByESGName",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "readData"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getHistoryByESGName"})
+        }
+      """
+    )
+  
+    // @LINE:20
+    def saveAs: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ESGController.saveAs",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "saveAsESG"})
         }
       """
     )
   
     // @LINE:19
-    def saveESGToDB: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.ESGController.saveESGToDB",
+    def save: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ESGController.save",
       """
         function() {
-        
-          if (true) {
-            return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "saveESGToDB"})
-          }
-        
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "saveESG"})
+        }
+      """
+    )
+  
+    // @LINE:21
+    def getExistESGs: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ESGController.getExistESGs",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "findExistESGs"})
         }
       """
     )

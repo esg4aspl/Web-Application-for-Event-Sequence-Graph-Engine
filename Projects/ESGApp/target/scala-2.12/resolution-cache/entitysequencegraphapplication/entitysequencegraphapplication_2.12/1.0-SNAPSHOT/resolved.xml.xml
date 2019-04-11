@@ -4,7 +4,7 @@
 		module="entitysequencegraphapplication_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20190305210746"
+		publication="20190411235438"
 	>
 		<description>
 		EntitySequenceGraphApplication

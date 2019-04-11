@@ -4,7 +4,7 @@
 		module="entitysequencegraphapplication$sources_javadoc"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20190305210807"
+		publication="20190411235422"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>

@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGApp/conf/routes
-// @DATE:Wed Mar 06 20:07:21 EET 2019
+// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/ESGApp/conf/routes
+// @DATE:Fri Apr 12 00:34:18 EET 2019
 
 import play.api.mvc.Call
 
@@ -54,14 +54,14 @@ package controllers {
   
   }
 
-  // @LINE:41
+  // @LINE:52
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:41
+    // @LINE:52
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))
@@ -84,50 +84,50 @@ package controllers {
   
   }
 
-  // @LINE:32
+  // @LINE:43
   class ReverseBooksController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:35
+    // @LINE:46
     def edit(id:Integer): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "books/edit/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Integer]].unbind("id", id)))
     }
   
-    // @LINE:33
+    // @LINE:44
     def create(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "books/create")
     }
   
-    // @LINE:34
+    // @LINE:45
     def show(id:Integer): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "books/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Integer]].unbind("id", id)))
     }
   
-    // @LINE:38
+    // @LINE:49
     def destroy(id:Integer): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "books/delete/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Integer]].unbind("id", id)))
     }
   
-    // @LINE:37
+    // @LINE:48
     def save(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "books/create")
     }
   
-    // @LINE:36
+    // @LINE:47
     def update(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "books/edit")
     }
   
-    // @LINE:32
+    // @LINE:43
     def index(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "books")
@@ -178,30 +178,34 @@ package controllers {
     }
 
   
-    // @LINE:21
-    def saveJPEGToDB(): Call = {
+    // @LINE:23
+    def getESGByName(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "saveJPEG")
+      Call("POST", _prefix + { _defaultPrefix } + "getESGByName")
     }
   
     // @LINE:22
-    def readData(): Call = {
+    def getHistoryByESGName(): Call = {
       
-      Call("POST", _prefix + { _defaultPrefix } + "readData")
+      Call("POST", _prefix + { _defaultPrefix } + "getHistoryByESGName")
+    }
+  
+    // @LINE:20
+    def saveAs(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "saveAsESG")
     }
   
     // @LINE:19
-    def saveESGToDB(): Call = {
-    
-      () match {
+    def save(): Call = {
       
-        // @LINE:19
-        case ()  =>
-          
-          Call("POST", _prefix + { _defaultPrefix } + "saveESGToDB")
+      Call("POST", _prefix + { _defaultPrefix } + "saveESG")
+    }
+  
+    // @LINE:21
+    def getExistESGs(): Call = {
       
-      }
-    
+      Call("POST", _prefix + { _defaultPrefix } + "findExistESGs")
     }
   
   }

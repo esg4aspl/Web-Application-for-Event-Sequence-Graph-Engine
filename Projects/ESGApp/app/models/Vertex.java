@@ -3,11 +3,6 @@ package models;
 public class Vertex {
 	private Integer id;
 	private String event;
-	public Vertex(int id, String event)
-	{
-		setId(id);
-		setEvent(event);
-	}
 	public Integer getId() {
 		return id;
 	}

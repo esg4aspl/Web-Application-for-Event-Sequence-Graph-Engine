@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/Projects/ESGApp/conf/routes
-// @DATE:Wed Mar 06 20:07:21 EET 2019
+// @SOURCE:/home/burcu/git/Web-Application-for-Event-Sequence-Graph-Engine/ESGApp/conf/routes
+// @DATE:Fri Apr 12 00:34:18 EET 2019
 
 package router
 
@@ -24,9 +24,9 @@ class Routes(
   PersonController_0: controllers.PersonController,
   // @LINE:19
   ESGController_5: controllers.ESGController,
-  // @LINE:32
+  // @LINE:43
   BooksController_3: controllers.BooksController,
-  // @LINE:41
+  // @LINE:52
   Assets_6: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
@@ -43,9 +43,9 @@ class Routes(
     PersonController_0: controllers.PersonController,
     // @LINE:19
     ESGController_5: controllers.ESGController,
-    // @LINE:32
+    // @LINE:43
     BooksController_3: controllers.BooksController,
-    // @LINE:41
+    // @LINE:52
     Assets_6: controllers.Assets
   ) = this(errorHandler, HomeController_2, CountController_1, AsyncController_4, PersonController_0, ESGController_5, BooksController_3, Assets_6, "/")
 
@@ -68,10 +68,11 @@ class Routes(
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """sayHelloWithBodyParser""", """controllers.PersonController.sayHelloWithBodyParser()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """sayHelloWithBodyParser""", """controllers.PersonController.sayHelloWithBodyParser()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """welcome/""" + "$" + """name<[^/]+>/""" + "$" + """lastName<[^/]+>""", """controllers.HomeController.welcomeName(name:String, lastName:String)"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """saveESGToDB""", """controllers.ESGController.saveESGToDB()"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """sendJson""", """controllers.ESGController.saveESGToDB()"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """saveJPEG""", """controllers.ESGController.saveJPEGToDB()"""),
-    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """readData""", """controllers.ESGController.readData()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """saveESG""", """controllers.ESGController.save()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """saveAsESG""", """controllers.ESGController.saveAs()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """findExistESGs""", """controllers.ESGController.getExistESGs()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """getHistoryByESGName""", """controllers.ESGController.getHistoryByESGName()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """getESGByName""", """controllers.ESGController.getESGByName()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """books""", """controllers.BooksController.index"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """books/create""", """controllers.BooksController.create()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """books/""" + "$" + """id<[^/]+>""", """controllers.BooksController.show(id:Integer)"""),
@@ -250,82 +251,100 @@ class Routes(
   )
 
   // @LINE:19
-  private[this] lazy val controllers_ESGController_saveESGToDB9_route = Route("POST",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("saveESGToDB")))
+  private[this] lazy val controllers_ESGController_save9_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("saveESG")))
   )
-  private[this] lazy val controllers_ESGController_saveESGToDB9_invoker = createInvoker(
-    ESGController_5.saveESGToDB(),
+  private[this] lazy val controllers_ESGController_save9_invoker = createInvoker(
+    ESGController_5.save(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ESGController",
-      "saveESGToDB",
+      "save",
       Nil,
       "POST",
-      this.prefix + """saveESGToDB""",
+      this.prefix + """saveESG""",
       """""",
       Seq()
     )
   )
 
   // @LINE:20
-  private[this] lazy val controllers_ESGController_saveESGToDB10_route = Route("POST",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("sendJson")))
+  private[this] lazy val controllers_ESGController_saveAs10_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("saveAsESG")))
   )
-  private[this] lazy val controllers_ESGController_saveESGToDB10_invoker = createInvoker(
-    ESGController_5.saveESGToDB(),
+  private[this] lazy val controllers_ESGController_saveAs10_invoker = createInvoker(
+    ESGController_5.saveAs(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ESGController",
-      "saveESGToDB",
+      "saveAs",
       Nil,
       "POST",
-      this.prefix + """sendJson""",
+      this.prefix + """saveAsESG""",
       """""",
       Seq()
     )
   )
 
   // @LINE:21
-  private[this] lazy val controllers_ESGController_saveJPEGToDB11_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("saveJPEG")))
+  private[this] lazy val controllers_ESGController_getExistESGs11_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("findExistESGs")))
   )
-  private[this] lazy val controllers_ESGController_saveJPEGToDB11_invoker = createInvoker(
-    ESGController_5.saveJPEGToDB(),
+  private[this] lazy val controllers_ESGController_getExistESGs11_invoker = createInvoker(
+    ESGController_5.getExistESGs(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ESGController",
-      "saveJPEGToDB",
+      "getExistESGs",
       Nil,
-      "GET",
-      this.prefix + """saveJPEG""",
+      "POST",
+      this.prefix + """findExistESGs""",
       """""",
       Seq()
     )
   )
 
   // @LINE:22
-  private[this] lazy val controllers_ESGController_readData12_route = Route("POST",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("readData")))
+  private[this] lazy val controllers_ESGController_getHistoryByESGName12_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("getHistoryByESGName")))
   )
-  private[this] lazy val controllers_ESGController_readData12_invoker = createInvoker(
-    ESGController_5.readData(),
+  private[this] lazy val controllers_ESGController_getHistoryByESGName12_invoker = createInvoker(
+    ESGController_5.getHistoryByESGName(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.ESGController",
-      "readData",
+      "getHistoryByESGName",
       Nil,
       "POST",
-      this.prefix + """readData""",
+      this.prefix + """getHistoryByESGName""",
       """""",
       Seq()
     )
   )
 
-  // @LINE:32
-  private[this] lazy val controllers_BooksController_index13_route = Route("GET",
+  // @LINE:23
+  private[this] lazy val controllers_ESGController_getESGByName13_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("getESGByName")))
+  )
+  private[this] lazy val controllers_ESGController_getESGByName13_invoker = createInvoker(
+    ESGController_5.getESGByName(),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.ESGController",
+      "getESGByName",
+      Nil,
+      "POST",
+      this.prefix + """getESGByName""",
+      """""",
+      Seq()
+    )
+  )
+
+  // @LINE:43
+  private[this] lazy val controllers_BooksController_index14_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("books")))
   )
-  private[this] lazy val controllers_BooksController_index13_invoker = createInvoker(
+  private[this] lazy val controllers_BooksController_index14_invoker = createInvoker(
     BooksController_3.index,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -339,11 +358,11 @@ class Routes(
     )
   )
 
-  // @LINE:33
-  private[this] lazy val controllers_BooksController_create14_route = Route("GET",
+  // @LINE:44
+  private[this] lazy val controllers_BooksController_create15_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("books/create")))
   )
-  private[this] lazy val controllers_BooksController_create14_invoker = createInvoker(
+  private[this] lazy val controllers_BooksController_create15_invoker = createInvoker(
     BooksController_3.create(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -357,11 +376,11 @@ class Routes(
     )
   )
 
-  // @LINE:34
-  private[this] lazy val controllers_BooksController_show15_route = Route("GET",
+  // @LINE:45
+  private[this] lazy val controllers_BooksController_show16_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("books/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_BooksController_show15_invoker = createInvoker(
+  private[this] lazy val controllers_BooksController_show16_invoker = createInvoker(
     BooksController_3.show(fakeValue[Integer]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -375,11 +394,11 @@ class Routes(
     )
   )
 
-  // @LINE:35
-  private[this] lazy val controllers_BooksController_edit16_route = Route("GET",
+  // @LINE:46
+  private[this] lazy val controllers_BooksController_edit17_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("books/edit/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_BooksController_edit16_invoker = createInvoker(
+  private[this] lazy val controllers_BooksController_edit17_invoker = createInvoker(
     BooksController_3.edit(fakeValue[Integer]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -393,11 +412,11 @@ class Routes(
     )
   )
 
-  // @LINE:36
-  private[this] lazy val controllers_BooksController_update17_route = Route("POST",
+  // @LINE:47
+  private[this] lazy val controllers_BooksController_update18_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("books/edit")))
   )
-  private[this] lazy val controllers_BooksController_update17_invoker = createInvoker(
+  private[this] lazy val controllers_BooksController_update18_invoker = createInvoker(
     BooksController_3.update(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -411,11 +430,11 @@ class Routes(
     )
   )
 
-  // @LINE:37
-  private[this] lazy val controllers_BooksController_save18_route = Route("POST",
+  // @LINE:48
+  private[this] lazy val controllers_BooksController_save19_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("books/create")))
   )
-  private[this] lazy val controllers_BooksController_save18_invoker = createInvoker(
+  private[this] lazy val controllers_BooksController_save19_invoker = createInvoker(
     BooksController_3.save(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -429,11 +448,11 @@ class Routes(
     )
   )
 
-  // @LINE:38
-  private[this] lazy val controllers_BooksController_destroy19_route = Route("GET",
+  // @LINE:49
+  private[this] lazy val controllers_BooksController_destroy20_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("books/delete/"), DynamicPart("id", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_BooksController_destroy19_invoker = createInvoker(
+  private[this] lazy val controllers_BooksController_destroy20_invoker = createInvoker(
     BooksController_3.destroy(fakeValue[Integer]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -447,11 +466,11 @@ class Routes(
     )
   )
 
-  // @LINE:41
-  private[this] lazy val controllers_Assets_versioned20_route = Route("GET",
+  // @LINE:52
+  private[this] lazy val controllers_Assets_versioned21_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
-  private[this] lazy val controllers_Assets_versioned20_invoker = createInvoker(
+  private[this] lazy val controllers_Assets_versioned21_invoker = createInvoker(
     Assets_6.versioned(fakeValue[String], fakeValue[Asset]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -523,75 +542,81 @@ class Routes(
       }
   
     // @LINE:19
-    case controllers_ESGController_saveESGToDB9_route(params@_) =>
+    case controllers_ESGController_save9_route(params@_) =>
       call { 
-        controllers_ESGController_saveESGToDB9_invoker.call(ESGController_5.saveESGToDB())
+        controllers_ESGController_save9_invoker.call(ESGController_5.save())
       }
   
     // @LINE:20
-    case controllers_ESGController_saveESGToDB10_route(params@_) =>
+    case controllers_ESGController_saveAs10_route(params@_) =>
       call { 
-        controllers_ESGController_saveESGToDB10_invoker.call(ESGController_5.saveESGToDB())
+        controllers_ESGController_saveAs10_invoker.call(ESGController_5.saveAs())
       }
   
     // @LINE:21
-    case controllers_ESGController_saveJPEGToDB11_route(params@_) =>
+    case controllers_ESGController_getExistESGs11_route(params@_) =>
       call { 
-        controllers_ESGController_saveJPEGToDB11_invoker.call(ESGController_5.saveJPEGToDB())
+        controllers_ESGController_getExistESGs11_invoker.call(ESGController_5.getExistESGs())
       }
   
     // @LINE:22
-    case controllers_ESGController_readData12_route(params@_) =>
+    case controllers_ESGController_getHistoryByESGName12_route(params@_) =>
       call { 
-        controllers_ESGController_readData12_invoker.call(ESGController_5.readData())
+        controllers_ESGController_getHistoryByESGName12_invoker.call(ESGController_5.getHistoryByESGName())
       }
   
-    // @LINE:32
-    case controllers_BooksController_index13_route(params@_) =>
+    // @LINE:23
+    case controllers_ESGController_getESGByName13_route(params@_) =>
       call { 
-        controllers_BooksController_index13_invoker.call(BooksController_3.index)
+        controllers_ESGController_getESGByName13_invoker.call(ESGController_5.getESGByName())
       }
   
-    // @LINE:33
-    case controllers_BooksController_create14_route(params@_) =>
+    // @LINE:43
+    case controllers_BooksController_index14_route(params@_) =>
       call { 
-        controllers_BooksController_create14_invoker.call(BooksController_3.create())
+        controllers_BooksController_index14_invoker.call(BooksController_3.index)
       }
   
-    // @LINE:34
-    case controllers_BooksController_show15_route(params@_) =>
+    // @LINE:44
+    case controllers_BooksController_create15_route(params@_) =>
+      call { 
+        controllers_BooksController_create15_invoker.call(BooksController_3.create())
+      }
+  
+    // @LINE:45
+    case controllers_BooksController_show16_route(params@_) =>
       call(params.fromPath[Integer]("id", None)) { (id) =>
-        controllers_BooksController_show15_invoker.call(BooksController_3.show(id))
+        controllers_BooksController_show16_invoker.call(BooksController_3.show(id))
       }
   
-    // @LINE:35
-    case controllers_BooksController_edit16_route(params@_) =>
+    // @LINE:46
+    case controllers_BooksController_edit17_route(params@_) =>
       call(params.fromPath[Integer]("id", None)) { (id) =>
-        controllers_BooksController_edit16_invoker.call(BooksController_3.edit(id))
+        controllers_BooksController_edit17_invoker.call(BooksController_3.edit(id))
       }
   
-    // @LINE:36
-    case controllers_BooksController_update17_route(params@_) =>
+    // @LINE:47
+    case controllers_BooksController_update18_route(params@_) =>
       call { 
-        controllers_BooksController_update17_invoker.call(BooksController_3.update())
+        controllers_BooksController_update18_invoker.call(BooksController_3.update())
       }
   
-    // @LINE:37
-    case controllers_BooksController_save18_route(params@_) =>
+    // @LINE:48
+    case controllers_BooksController_save19_route(params@_) =>
       call { 
-        controllers_BooksController_save18_invoker.call(BooksController_3.save())
+        controllers_BooksController_save19_invoker.call(BooksController_3.save())
       }
   
-    // @LINE:38
-    case controllers_BooksController_destroy19_route(params@_) =>
+    // @LINE:49
+    case controllers_BooksController_destroy20_route(params@_) =>
       call(params.fromPath[Integer]("id", None)) { (id) =>
-        controllers_BooksController_destroy19_invoker.call(BooksController_3.destroy(id))
+        controllers_BooksController_destroy20_invoker.call(BooksController_3.destroy(id))
       }
   
-    // @LINE:41
-    case controllers_Assets_versioned20_route(params@_) =>
+    // @LINE:52
+    case controllers_Assets_versioned21_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
-        controllers_Assets_versioned20_invoker.call(Assets_6.versioned(path, file))
+        controllers_Assets_versioned21_invoker.call(Assets_6.versioned(path, file))
       }
   }
 }
