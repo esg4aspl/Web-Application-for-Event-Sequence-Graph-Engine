@@ -14,6 +14,7 @@ public class ESG {
 	private ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
 	private ArrayList < Edge > edgeList = new ArrayList < Edge >();
 	private int userId;
+	private int engineId;
 	// Getter Methods 
 
 	
