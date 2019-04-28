@@ -32,7 +32,7 @@ public class ESGController extends Controller{
 	private ArrayList<ESG> ESGHistory = new ArrayList<ESG>();
 	private EngineConnection engine = new EngineConnection();
 	
-	//Generate ESG test cases from the engine
+	//Generates ESG test cases from the engine
 	public Result generateTestCases() throws JsonParseException, JsonMappingException, IOException, ParseException
 	{
 		ESG esg = requestESGFromUI();
