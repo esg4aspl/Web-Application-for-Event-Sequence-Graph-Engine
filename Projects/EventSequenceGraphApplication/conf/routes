@@ -1,0 +1,53 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                          controllers.HomeController.index
+# An example controller showing how to use dependency injection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+POST	/sayHello					controllers.PersonController.sayHello()
+GET		/sayHello					controllers.PersonController.sayHello()
+POST	/sayHelloWithTextPlain		controllers.PersonController.sayHelloWithTestPlain()
+POST	/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParser()
+GET		/sayHelloWithBodyParser		controllers.PersonController.sayHelloWithBodyParser()
+GET     /welcome/:name/:lastName    controllers.HomeController.welcomeName(name:String, lastName:String)
+
+POST	/saveESG					controllers.ESGController.save()
+POST	/saveAsESG					controllers.ESGController.saveAs()
+POST	/findExistESGs				controllers.ESGController.getExistESGs()
+POST	/getHistoryByESGName		controllers.ESGController.getHistoryByESGName()
+POST	/getESGByName				controllers.ESGController.getESGByName()
+POST	/generateTestCases			controllers.ESGController.generateTestCases()
+##POST	/sendESGNamesToUI			controllers.ESGController.sendESGNamesToUI()
+#POST	/requestedESGByNameFromUI	controllers.ESGController.requestedESGByNameFromUI()
+#POST	/findCurrent				controllers.ESGController.findCurrent()
+#POST	/findNamesWithQueryMongoDB	controllers.ESGController.findNamesWithQueryMongoDB()
+
+#GET	/saveJPEG					controllers.ESGController.saveJPEGToDB()
+#POST	/readData					controllers.ESGController.readData()
+
+
+
+#3 tane route olucak. turkanin requestlerini search yapmak istedigi parametreye gore dondurecek.
+##1 tum listeyi getirmesi
+##2 isme gore getirmesi
+##3 ismin icinde gecen bir parcayla getirmesi.
+
+#POST	/sendJson					controllers.PersonController.sendJSON()
+#GET		/connectDB					controllers.StudentController.dbConnection()
+#GET		/readJson					controllers.StudentController.readDataFromJSON()
+
+GET		/books						controllers.BooksController.index
+GET		/books/create				controllers.BooksController.create()
+GET		/books/:id					controllers.BooksController.show(id: Integer)
+GET		/books/edit/:id				controllers.BooksController.edit(id: Integer)
+POST	/books/edit					controllers.BooksController.update()
+POST	/books/create				controllers.BooksController.save()
+GET		/books/delete/:id			controllers.BooksController.destroy(id: Integer)
+	
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
