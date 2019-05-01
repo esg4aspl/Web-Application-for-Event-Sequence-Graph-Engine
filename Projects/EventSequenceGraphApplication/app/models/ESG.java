@@ -14,8 +14,8 @@ public class ESG {
 	private ArrayList < Object > edges = new ArrayList < Object >();
 	private ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
 	private ArrayList < Edge > edgeList = new ArrayList < Edge >();
-	//private int userId;
 	private String generatedTestCases;
+	
 	// Getter Methods 
 
 	public Object get_id() {
