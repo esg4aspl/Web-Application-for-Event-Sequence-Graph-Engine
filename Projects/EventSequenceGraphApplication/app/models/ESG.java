@@ -6,15 +6,15 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class ESG {
 	private Object _id;
-	private String id;
+	private String dateTime;
+	private int id;
 	private String name;
 	private String xmlVersion;
 	private ArrayList < Object > vertices = new ArrayList < Object > ();
 	private ArrayList < Object > edges = new ArrayList < Object >();
 	private ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
 	private ArrayList < Edge > edgeList = new ArrayList < Edge >();
-	private int userId;
-	private int generatedTestCasesId;
+	//private int userId;
 	private String generatedTestCases;
 	// Getter Methods 
 
@@ -22,20 +22,14 @@ public class ESG {
 		return _id;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	/*public void setUserId(int userId) {
-	this.userId = userId;
-}
 
-public void setGeneratedTestCasesId(int generatedTestCasesId) {
-	this.generatedTestCasesId = generatedTestCasesId;
-}
-
-public void setGeneratedTestCases(String generatedTestCases) {
-	this.generatedTestCases = generatedTestCases;
-}*/
+	public String getDateTime() {
+		return dateTime;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -70,14 +64,6 @@ public void setGeneratedTestCases(String generatedTestCases) {
 		return edgeList;
 	}
 	
-	public int getUserId() {
-		return userId;
-	}
-	
-	public int getGeneratedTestCasesId() {
-		return generatedTestCasesId;
-	}
-	
 	public String getGeneratedTestCases() {
 		return generatedTestCases;
 	}
@@ -88,10 +74,14 @@ public void setGeneratedTestCases(String generatedTestCases) {
 		this._id = _id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -108,14 +98,6 @@ public void setGeneratedTestCases(String generatedTestCases) {
 		this.edges = edges;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	
-	public void setGeneratedTestCasesId(int generatedTestCasesId) {
-		this.generatedTestCasesId = generatedTestCasesId;
-	}
-	
 	public void setGeneratedTestCases(String generatedTestCases) {
 		this.generatedTestCases = generatedTestCases;
 	}
@@ -125,7 +107,8 @@ public void setGeneratedTestCases(String generatedTestCases) {
 		return "RootObject [id=" + id + ", name=" + name + ", xmlVersion=" + xmlVersion + ", vertices="
 				+ vertices + ", edges=" + edges + "]";
 	}
-	
+
+
 }
 
 

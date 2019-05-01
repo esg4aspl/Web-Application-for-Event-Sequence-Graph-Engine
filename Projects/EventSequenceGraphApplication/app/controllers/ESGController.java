@@ -14,6 +14,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 
 import dataAccessLayer.DBConnections;
 import dataAccessLayer.DBOperations;
@@ -32,6 +34,17 @@ public class ESGController extends Controller{
 	private ArrayList<ESG> ESGHistory = new ArrayList<ESG>();
 	private EngineConnection engine = new EngineConnection();
 	
+	public Result createUnique() throws ParseException, org.codehaus.jackson.JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException
+	{
+		ArrayList<ESG> list =  dbOperation.getAllESGList();
+		for(ESG e: list)
+		{
+			//esgName += "\n"+e.toString()+"\n";
+		}
+		ESG esg = requestESGFromUI();
+		return ok(esg.toString());
+	}
+	
 	//Generates ESG test cases from the engine
 	public Result generateTestCases() throws JsonParseException, JsonMappingException, IOException, ParseException
 	{
@@ -47,18 +60,24 @@ public class ESGController extends Controller{
 	}
 	
 	// save ESG
-	public Result save() throws JsonParseException, JsonMappingException, IOException
+	public Result save() throws JsonMappingException, IOException, ParseException
 	{
+		ESG esg = requestESGFromUI();
+		esg.setId((dbOperation.getNewestESG().getId())+1);
+
 		try {
-			ESG esg = requestESGFromUI();
 			if(compareESGName(esg.getName()))
 			{
-				this.ESGHistory = dbOperation.getESGHistoryList(esg.getName());
+
 				dbOperation.saveESG(esg);
 			}
-			else dbOperation.saveESGToMongoDB(esg);
 
-			return ok(esg.getName()+"is saved.");
+			else 
+			{
+				dbOperation.saveNewESG(esg);
+			}
+
+			return ok(esg.getName()+" is saved.");
 
 		} catch (Exception e) {
 			return ok(e.getMessage());
@@ -120,7 +139,18 @@ public class ESGController extends Controller{
 	{
 		String esgName=request().body().asText();
 		ESG searchingESG = dbOperation.findESGByName(esgName);
-		return ok(Json.toJson(searchingESG));
+		return ok(Json.toJson(searchingESG.getXmlVersion()));
+	}
+	
+	// search an ESG with its dateTime
+	public Result getESGByDateTime() throws ParseException, JsonParseException, JsonMappingException, IOException
+	{
+		String dateTime=request().body().asText();
+		BasicDBObject searchByNameQuery = new BasicDBObject();
+		searchByNameQuery.put("dateTime", dateTime);
+		DBCursor cursor = db.collection().find(searchByNameQuery);
+		ESG esg =  new ObjectMapper().readValue(cursor.next().toString(), ESG.class);;
+		return ok(esg.getXmlVersion());
 	}
 
 	//UI requestinden gelen stringi ESG objesine convert eder ve onu ESG objesi olarak dondurur.
@@ -145,8 +175,9 @@ public class ESGController extends Controller{
 
 	public boolean compareESGName(String esgName) throws org.codehaus.jackson.JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException
 	{
+		
 		boolean bool=false;
-		for(ESG e:esgList)
+		for(ESG e:dbOperation.getAllESGList())
 		{
 			if (e.getName().equals(esgName)) 
 			{
@@ -159,14 +190,12 @@ public class ESGController extends Controller{
 
 	public Result findCurrent() throws ParseException
 	{
-		//String esgName=request().body().asText();
-		//findNamesWithQueryMongoDB();
 		ESG esgCurrent =ESGHistory.get(0);
 		for(int i=1; i<ESGHistory.size();i++)
-		{
+		{/*
 			if (isCurrent(ESGHistory.get(i).getId(), esgCurrent.getId())) {
 				esgCurrent=ESGHistory.get(i);
-			}
+			}*/
 		}
 
 		return ok(esgCurrent.toString());

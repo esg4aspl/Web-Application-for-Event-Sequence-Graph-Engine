@@ -11,10 +11,13 @@ GET     /message                    controllers.AsyncController.message
 
 POST	/saveESG					controllers.ESGController.save()
 POST	/saveAsESG					controllers.ESGController.saveAs()
-POST	/findExistESGs				controllers.ESGController.getExistESGs()
+POST	/getExistESGs				controllers.ESGController.getExistESGs()
 POST	/getHistoryByESGName		controllers.ESGController.getHistoryByESGName()
 POST	/getESGByName				controllers.ESGController.getESGByName()
+POST	/getESGByDateTime			controllers.ESGController.getESGByDateTime()
 POST	/generateTestCases			controllers.ESGController.generateTestCases()
+#POST	/createUnique				controllers.ESGController.createUnique()
+
 ##POST	/sendESGNamesToUI			controllers.ESGController.sendESGNamesToUI()
 #POST	/requestedESGByNameFromUI	controllers.ESGController.requestedESGByNameFromUI()
 #POST	/findCurrent				controllers.ESGController.findCurrent()
