@@ -6,16 +6,21 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class ESG {
 	private Object _id;
-	private String dateTime;
 	private int id;
+
+
+	private String dateTime;
 	private String name;
 	private String xmlVersion;
+	private int type;
+	private String typeName;
 	private ArrayList < Object > vertices = new ArrayList < Object > ();
 	private ArrayList < Object > edges = new ArrayList < Object >();
 	private ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
 	private ArrayList < Edge > edgeList = new ArrayList < Edge >();
+	private int userId;
+	private int generatedTestCasesId;
 	private String generatedTestCases;
-	
 	// Getter Methods 
 
 	public Object get_id() {
@@ -25,15 +30,36 @@ public class ESG {
 	public int getId() {
 		return id;
 	}
-
 	public String getDateTime() {
 		return dateTime;
 	}
-	
+
+
+	/*public void setUserId(int userId) {
+	this.userId = userId;
+}
+
+public void setGeneratedTestCasesId(int generatedTestCasesId) {
+	this.generatedTestCasesId = generatedTestCasesId;
+}
+
+public void setGeneratedTestCases(String generatedTestCases) {
+	this.generatedTestCases = generatedTestCases;
+}*/
 	public String getName() {
 		return name;
 	}
+	public int getType() {
+		return type;
+	}
 
+	
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	
 	public String getXmlVersion() {
 		return xmlVersion;
 	}
@@ -64,6 +90,14 @@ public class ESG {
 		return edgeList;
 	}
 	
+	public int getUserId() {
+		return userId;
+	}
+	
+	public int getGeneratedTestCasesId() {
+		return generatedTestCasesId;
+	}
+	
 	public String getGeneratedTestCases() {
 		return generatedTestCases;
 	}
@@ -77,13 +111,21 @@ public class ESG {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 
 	public void setXmlVersion(String xmlVersion) {
@@ -98,6 +140,14 @@ public class ESG {
 		this.edges = edges;
 	}
 
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
+	public void setGeneratedTestCasesId(int generatedTestCasesId) {
+		this.generatedTestCasesId = generatedTestCasesId;
+	}
+	
 	public void setGeneratedTestCases(String generatedTestCases) {
 		this.generatedTestCases = generatedTestCases;
 	}
@@ -107,8 +157,7 @@ public class ESG {
 		return "RootObject [id=" + id + ", name=" + name + ", xmlVersion=" + xmlVersion + ", vertices="
 				+ vertices + ", edges=" + edges + "]";
 	}
-
-
+	
 }
 
 

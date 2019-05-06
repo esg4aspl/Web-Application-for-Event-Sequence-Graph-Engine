@@ -63,7 +63,16 @@ public class ESGController extends Controller{
 	public Result save() throws JsonMappingException, IOException, ParseException
 	{
 		ESG esg = requestESGFromUI();
-		esg.setId((dbOperation.getNewestESG().getId())+1);
+		if (dbOperation.getAllESGList().size()==0) {
+			esg.setId(0);
+		}
+		else esg.setId((dbOperation.getNewestESG().getId())+1);
+
+		if(esg.getTypeName().isEmpty())
+		{
+			esg.setType(0);
+		}
+		else esg.setType(1);
 
 		try {
 			if(compareESGName(esg.getName()))
@@ -125,13 +134,13 @@ public class ESGController extends Controller{
 	public Result getHistoryByESGName() throws JsonParseException, JsonMappingException, IOException
 	{
 		String esgName=request().body().asText();
-		String esgIdName="";
-		this.ESGHistory = dbOperation.getESGHistoryList(esgName);
-		for(ESG e : ESGHistory)
+		String esgHistory="";
+		//this.ESGHistory = dbOperation.getESGHistoryList(esgName);
+		for(ESG e : dbOperation.getESGHistoryList(esgName))
 		{
-			esgIdName += e.getId()+" " + e.getName() + "\n";
+			esgHistory += e.getDateTime()+" " + e.getName() + "\n";
 		}
-		return ok(esgIdName);
+		return ok(esgHistory);
 	}
 
 	// search an ESG with its Name

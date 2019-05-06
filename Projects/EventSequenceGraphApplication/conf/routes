@@ -16,7 +16,7 @@ POST	/getHistoryByESGName		controllers.ESGController.getHistoryByESGName()
 POST	/getESGByName				controllers.ESGController.getESGByName()
 POST	/getESGByDateTime			controllers.ESGController.getESGByDateTime()
 POST	/generateTestCases			controllers.ESGController.generateTestCases()
-#POST	/createUnique				controllers.ESGController.createUnique()
+POST	/createUnique				controllers.ESGController.createUnique()
 
 ##POST	/sendESGNamesToUI			controllers.ESGController.sendESGNamesToUI()
 #POST	/requestedESGByNameFromUI	controllers.ESGController.requestedESGByNameFromUI()

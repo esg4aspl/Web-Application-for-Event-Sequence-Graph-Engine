@@ -51,6 +51,8 @@ public class DBOperations {
 		BasicDBObject basicDBObject = new BasicDBObject();          
 		basicDBObject.put("id", esg.getId());
 		basicDBObject.put("dateTime", esg.getDateTime());
+		basicDBObject.put("type", esg.getType());
+		basicDBObject.put("typeName", esg.getTypeName());
 		basicDBObject.put("name", esg.getName());
 		basicDBObject.put("xmlVersion", esg.getXmlVersion());
 		basicDBObject.put("vertices", esg.getObjectVertices());
