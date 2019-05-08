@@ -38,12 +38,12 @@ public class ESGController extends Controller{
 		ESG esg = requestESGFromUI();
 		String esgFile = toStringForEngine(esg);
 		JsonObject jsonObject = new JsonParser().parse(esgFile).getAsJsonObject();
-		JSONObject json = new JSONObject(jsonObject.toString());
-		String testCases = engine.parseJSONObjectForESGSimpleCreation(json);
+		JSONObject jsonObj = new JSONObject(jsonObject.toString());
+		String testCases = engine.parseJSONObjectForESGSimpleCreation(jsonObj);
 		esg.setGeneratedTestCases(testCases);
 		dbOperation.saveESGToMongoDB(esg);
 		
-		return ok(toStringForEngine(esg));
+		return ok(testCases);
 	}
 	
 	// save ESG
@@ -123,8 +123,6 @@ public class ESGController extends Controller{
 		return ok(Json.toJson(searchingESG));
 	}
 
-
-
 	//UI requestinden gelen stringi ESG objesine convert eder ve onu ESG objesi olarak dondurur.
 	public ESG requestESGFromUI() throws JsonParseException, JsonMappingException, IOException
 	{
@@ -196,19 +194,19 @@ public class ESGController extends Controller{
 		String esgString = "{\"id\":"+"\""+esg.getId()+"\""+","+"\"name\":"+"\""+esg.getName()+"\""+","+"\"vertices\":"+"[";
 		for(Vertex v: esg.getVertexList())
 		{
-			esgString+="{"+"\""+"id"+"\""+":"+v.getId()+","+"\"event\":"+"\""+v.getEvent()+"\""+"},";
-			/*if (esg.getVertexList().size()>0) {
-				esgString += ",";
-			}*/
+			esgString += "{"+"\""+"id"+"\""+":"+v.getId()+","+"\"event\":"+"\""+v.getEvent()+"\""+"},";
 			
 		}
 		esgString = esgString.substring(0, esgString.length() - 1);
-		esgString+="],"+"\"edges\":[{";
+		esgString += "],"+"\"edges\":[";
+		
 		for(Edge e: esg.getEdgeList())
 		{
-			esgString+="\"id\":"+e.getId()+","+"\"source\":"+e.getSource()+","+"\"target\":"+e.getTarget();
+			esgString += "{"+"\"id\":"+e.getId()+","+"\"source\":"+e.getSource()+","+"\"target\":"+e.getTarget()+"},";
 		}
-		esgString+="}]}";
+		esgString = esgString.substring(0, esgString.length() - 1);
+		esgString += "]}";
+		
 		return esgString;
 	}
 	
