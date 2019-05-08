@@ -68,7 +68,7 @@ public class ESGController extends Controller{
 		}
 		else esg.setId((dbOperation.getNewestESG().getId())+1);
 
-		if(esg.getTypeName().isEmpty())
+		if(esg.getFeatureName().isEmpty())
 		{
 			esg.setType(0);
 		}

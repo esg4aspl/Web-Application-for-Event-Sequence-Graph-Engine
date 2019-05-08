@@ -13,7 +13,7 @@ public class ESG {
 	private String name;
 	private String xmlVersion;
 	private int type;
-	private String typeName;
+	private String featureName;
 	private ArrayList < Object > vertices = new ArrayList < Object > ();
 	private ArrayList < Object > edges = new ArrayList < Object >();
 	private ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
@@ -55,8 +55,8 @@ public void setGeneratedTestCases(String generatedTestCases) {
 
 	
 
-	public String getTypeName() {
-		return typeName;
+	public String getFeatureName() {
+		return featureName;
 	}
 
 	
@@ -124,8 +124,8 @@ public void setGeneratedTestCases(String generatedTestCases) {
 		this.type = type;
 	}
 	
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	public void setFeatureName(String featureName) {
+		this.featureName = featureName;
 	}
 
 	public void setXmlVersion(String xmlVersion) {
