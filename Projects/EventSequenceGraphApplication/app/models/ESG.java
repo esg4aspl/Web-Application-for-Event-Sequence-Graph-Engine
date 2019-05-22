@@ -6,9 +6,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class ESG {
 	private Object _id;
-	private String id;
+	private int id;
+	private String dateTime;
 	private String name;
 	private String xmlVersion;
+	private String type;
+	private String featureName;
 	private ArrayList < Object > vertices = new ArrayList < Object > ();
 	private ArrayList < Object > edges = new ArrayList < Object >();
 	private ArrayList < Vertex > vertexList = new ArrayList < Vertex > ();
@@ -16,30 +19,36 @@ public class ESG {
 	private int userId;
 	private int generatedTestCasesId;
 	private String generatedTestCases;
+	
 	// Getter Methods 
 
 	public Object get_id() {
 		return _id;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	/*public void setUserId(int userId) {
-	this.userId = userId;
-}
+	public String getDateTime() {
+		return dateTime;
+	}
+	public String getFeatureName() {
+		return featureName;
+	}
 
-public void setGeneratedTestCasesId(int generatedTestCasesId) {
-	this.generatedTestCasesId = generatedTestCasesId;
-}
+	public void setFeatureName(String featureName) {
+		this.featureName = featureName;
+	}
 
-public void setGeneratedTestCases(String generatedTestCases) {
-	this.generatedTestCases = generatedTestCases;
-}*/
 	public String getName() {
 		return name;
 	}
+	public String getType() {
+		return type;
+	}
 
+
+	
 	public String getXmlVersion() {
 		return xmlVersion;
 	}
@@ -88,14 +97,23 @@ public void setGeneratedTestCases(String generatedTestCases) {
 		this._id = _id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 	public void setXmlVersion(String xmlVersion) {
 		this.xmlVersion = xmlVersion;
 	}
@@ -127,6 +145,5 @@ public void setGeneratedTestCases(String generatedTestCases) {
 	}
 	
 }
-
 
 

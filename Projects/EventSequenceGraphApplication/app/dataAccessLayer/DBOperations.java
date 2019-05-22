@@ -5,7 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Pattern;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.mongodb.BasicDBObject;
@@ -16,30 +19,41 @@ import models.ESG;
 
 public class DBOperations {
 	protected static DBConnections db = new DBConnections();
-	private ESG oldestESG;
-	private ESG esg;
-	//protected BasicDBObject basicDBObject;
 
 	public void saveESG(ESG esg) throws ParseException
 	{
 		ArrayList<ESG> ESGHistory = getESGHistoryList(esg.getName());
-		this.oldestESG = getOldestESG(esg.getName());
+		if ( ESGHistory.size() < 10) 
+		{
 
-		if (ESGHistory.size() < 10) {
 			saveESGToMongoDB(esg);
 		}
 		else
 		{
-			deleteESGFromMongoDB(oldestESG);
+			deleteESGFromMongoDB(getOldestESG(esg.getName()));
 			saveESGToMongoDB(esg);
 		}
 	}
-
+	
+	public void saveNewESG(ESG esg) throws ParseException, JsonParseException, JsonMappingException, IOException
+	{
+		saveESGToMongoDB(esg);
+	}
+	
+	/*public void saveNewESGInHistory(ESG esg) throws ParseException, JsonParseException, JsonMappingException, IOException
+	{
+		esg.setId(getNewestESG().getId()+1);
+		saveESGToMongoDB(esg);
+	}*/
+	
 	public void saveESGToMongoDB(ESG esg)
 	{
 		DBCollection dbCollection = db.collection();
 		BasicDBObject basicDBObject = new BasicDBObject();          
 		basicDBObject.put("id", esg.getId());
+		basicDBObject.put("dateTime", esg.getDateTime());
+		basicDBObject.put("type", esg.getType());
+		basicDBObject.put("featureName", esg.getFeatureName());
 		basicDBObject.put("name", esg.getName());
 		basicDBObject.put("xmlVersion", esg.getXmlVersion());
 		basicDBObject.put("vertices", esg.getObjectVertices());
@@ -51,7 +65,10 @@ public class DBOperations {
 
 	public void deleteESGFromMongoDB(ESG oldestesg)
 	{
-		db.collection().remove(new BasicDBObject().append("id", oldestesg.getId()).append("name", oldestesg.getName()));
+		BasicDBObject searchByNameQuery = new BasicDBObject();
+		searchByNameQuery.put("name", oldestesg.getName());
+		db.collection().remove(searchByNameQuery.append("id", oldestesg.getId()));
+
 	}
 
 	public ESG findESGByName(String esgName) throws ParseException
@@ -62,20 +79,20 @@ public class DBOperations {
 		ESG eSG = getOldestESG(esgName);
 		return eSG;
 	}
-	
+
 	public ArrayList<ESG> getESGHistoryList(String esgName)
 	{
+		ArrayList<ESG> ESGHistory =  new ArrayList<>();
 		BasicDBObject searchByNameQuery = new BasicDBObject();
 		searchByNameQuery.put("name", esgName);
-		DBCursor cursor = db.collection().find(searchByNameQuery);
-		ArrayList<ESG> ESGHistory =  new ArrayList<>();
-		
+		DBCursor cursor = db.collection().find(searchByNameQuery).sort(new BasicDBObject("_id",1)).limit(100);
+
 		while(cursor.hasNext()) 
 		{
 			try 
 			{
-				oldestESG = new ObjectMapper().readValue(cursor.next().toString(), ESG.class);
-				ESGHistory.add(oldestESG);
+				ESG esg = new ObjectMapper().readValue(cursor.next().toString(), ESG.class);
+				ESGHistory.add(esg);
 			} catch (IOException e) 
 			{
 				e.printStackTrace();
@@ -87,31 +104,57 @@ public class DBOperations {
 	public ArrayList<ESG> getAllESGList() throws org.codehaus.jackson.JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException 
 	{
 		String esgDocument = "";
-		DBCollection collection=db.collection();
 		ArrayList<ESG> ESGList = new ArrayList<>();
-		DBCursor cursor= collection.find();
-		
+		DBCursor cursor= db.collection().find().sort(new BasicDBObject("_id",1)).limit(100);
 		while(cursor.hasNext())
 		{
-			esgDocument=cursor.next().toString();
-			ESG esg = new ObjectMapper().readValue(esgDocument, ESG.class); 
+			ESG esg = new ObjectMapper().readValue(cursor.next().toString(), ESG.class); 
 			ESGList.add(esg);
 		}
 
 		return ESGList;
 	}
+	
+	public String searchESGByName(String esgName) throws JsonParseException, JsonMappingException, IOException
+	{
+		
+		String esgNameList="";
+		BasicDBObject regQuery = new BasicDBObject();
+		regQuery.append("$regex", Pattern.quote(esgName));
+		BasicDBObject findQuery = new BasicDBObject();
+		findQuery.append("name", regQuery);
+		DBCursor cursor = db.collection().find(findQuery);
+		while (cursor.hasNext()) {
+			ESG esg = new ObjectMapper().readValue(cursor.next().toString(), ESG.class); 
+			if(!esgNameList.contains(esg.getName()))
+			{
+				esgNameList += esg.getName()+"\n";
+			}
+		}
+		return esgNameList;
+	}
+
 	public ESG getOldestESG(String esgName) throws ParseException
 	{
 		ArrayList<ESG> ESGHistory = getESGHistoryList(esgName);
 		ESG esgOldest = ESGHistory.get(0);
-		for(int i=1; i< ESGHistory.size();i++)
-		{
-			if (!isCurrent(ESGHistory.get(i).getId(), esgOldest.getId())) {
-				esgOldest = ESGHistory.get(i);
-			}
-		}
-		return oldestESG;
+		return esgOldest;
 	}
+	
+	public ESG getCurrentESG(String esgName) throws ParseException
+	{
+		ArrayList<ESG> ESGHistory = getESGHistoryList(esgName);
+		ESG esgOldest = ESGHistory.get(0);
+		return esgOldest;
+	}
+	
+	public ESG getNewestESG() throws ParseException, JsonParseException, JsonMappingException, IOException
+	{
+		ArrayList<ESG> ESGHistory = getAllESGList();
+		ESG esgNewest = ESGHistory.get(ESGHistory.size()-1);
+		return esgNewest;
+	}
+
 	public boolean isCurrent(String d1, String d2) throws ParseException
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
