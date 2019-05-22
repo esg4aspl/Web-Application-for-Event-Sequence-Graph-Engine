@@ -34,7 +34,7 @@ public class ESGController extends Controller{
 	private ArrayList<ESG> ESGHistory = new ArrayList<ESG>();
 	private EngineConnection engine = new EngineConnection();
 
-	//find ESG byName
+	//find ESG by Name
 	public Result searchESGByName() throws ParseException, org.codehaus.jackson.JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException
 	{
 		String esgName=request().body().asText();
@@ -90,7 +90,7 @@ public class ESGController extends Controller{
 		return ok(esg.getName()+" is saved");
 	}
 
-	// saveas ESG
+	// saveAs ESG
 	public Result saveAs() throws JsonParseException, JsonMappingException, IOException
 	{
 		try {
